@@ -130,6 +130,51 @@ def returnRune(jsonobj):
         newdict[key] = jsonobj[key]
     return newdict
 
+def returnPlayer(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        newdict[key] = jsonobj[key]
+    return newdict
+
+def returnBannedChampion(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        newdict[key] = jsonobj[key]
+    return newdict
+
+def returnFrame(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key != 'participantFrames') & (key != 'events')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnParticipantTimelineData(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        newdict[key] = jsonobj[key]
+    return newdict
+
+def returnEvent(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key != 'position') & (key != 'assistingParticipantIds')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnParticipantFrame(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key != 'position')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnPosition(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        newdict[key] = jsonobj[key]
+    return newdict
+
 print(returnMatchDetail(dataG))
 print(returnParticipant(dataG['participants'][0]))
 print(returnParticipantIdentity(dataG['participantIdentities'][0]))
@@ -139,6 +184,15 @@ print(returnMastery(dataG['participants'][0]['masteries'][0]))
 print(returnParticipantStats(dataG['participants'][0]['stats']))
 print(returnParticipantTimeline(dataG['participants'][0]['timeline']))
 print(returnRune(dataG['participants'][0]['runes'][0]))
+print(returnPlayer(dataG['participantIdentities'][0]['player']))
+print(returnPlayer(dataG['participantIdentities'][0]['player']))
+print(returnBannedChampion(dataG['teams'][0]['bans'][0]))
+print(returnFrame(dataG['timeline']['frames'][0]))
+print(returnParticipantTimelineData(dataG['participants'][0]['timeline']['csDiffPerMinDeltas']))
+print(returnEvent(dataG['timeline']['frames'][1]['events'][0]))
+print(returnParticipantFrame(dataG['timeline']['frames'][1]['participantFrames']['1']))
+print(returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']))
+print(returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']['position']))
 
 print('\n')
 
