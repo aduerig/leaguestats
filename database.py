@@ -134,3 +134,93 @@ class ParticipantStats(Base):
     wardsKilled = Column(BigInteger)
     wardsPlaced = Column(BigInteger)
     winner = Column(Boolean)
+
+
+class ParticpantTimeline(Base):
+    __tablename__ = 'participant_timeline'
+
+    lane = Column(String)
+    role = Column(String)
+
+
+class Rune(Base):
+    __tablename__ = 'rune'
+
+    rank = Column(BigInteger)
+    runeId = Column(BigInteger)
+
+
+class Player(Base):
+    __tablename__ = 'player'
+
+    matchHistoryUri = Column(String)
+    profileIcon = Column(Integer)
+    summonerId = Column(BigInteger)
+    summonerName = Column(String)
+
+
+class BannedChampion(Base):
+    __tablename__ = 'banned_champion'
+
+    championId = Column(Integer)
+    pickTurn = Column(Integer)
+
+
+class Frame(Base):
+    __tablename__ = 'frame'
+
+    timestamp = Column(BigInteger)
+
+
+class ParticipantTimelineData(Base):
+    __tablename__ = 'participant_timeline_data'
+
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class Event(Base):
+    __tablename__ = 'event'
+
+    ascendedType = Column(String)
+    buildingType = Column(String)
+    creatorId = Column(Integer)
+    eventType = Column(String)
+    itemAfter = Column(Integer)
+    itemBefore = Column(Integer)
+    itemId = Column(Integer)
+    killerId = Column(Integer)
+    laneType = Column(String)
+    levelUpType = Column(String)
+    monsterType = Column(String)
+    participantId = Column(Integer)
+    pointCaptured = Column(String)
+    skillSlot = Column(Integer)
+    teamId = Column(Integer)
+    timestamp = Column(BigInteger)
+    towerType = Column(String)
+    victimId = Column(Integer)
+    wardType = Column(String)
+
+
+class ParticipantFrame(Base):
+    __tablename__ = 'participant_frame'
+
+    currentGold = Column(Integer)
+    dominionScore = Column(Integer)
+    jungleMinionsKilled = Column(Integer)
+    level = Column(Integer)
+    minionsKilled = Column(Integer)
+    participantId = Column(Integer)
+    teamScore = Column(Integer)
+    totalGold = Column(Integer)
+    xp = Column(Integer)
+
+
+class Position(Base):
+    __tablename__ = 'position'
+
+    x = Column(Integer)
+    y = Column(Integer)
