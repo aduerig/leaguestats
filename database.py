@@ -191,6 +191,7 @@ class Rune(Base):
 class Player(Base):
     __tablename__ = 'player'
 
+    id = Column(BigInteger, primary_key=True)
     matchHistoryUri = Column(String)
     profileIcon = Column(Integer)
     summonerId = Column(BigInteger)
@@ -217,6 +218,7 @@ class Frame(Base):
 class ParticipantTimelineData(Base):
     __tablename__ = 'participant_timeline_data'
 
+    id = Column(BigInteger, primary_key=True)
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -226,6 +228,7 @@ class ParticipantTimelineData(Base):
 class Event(Base):
     __tablename__ = 'event'
 
+    id = Column(BigInteger, primary_key=True)
     ascendedType = Column(String)
     buildingType = Column(String)
     creatorId = Column(Integer)
@@ -250,6 +253,7 @@ class Event(Base):
 class ParticipantFrame(Base):
     __tablename__ = 'participant_frame'
 
+    id = Column(BigInteger, primary_key=True)
     currentGold = Column(Integer)
     dominionScore = Column(Integer)
     jungleMinionsKilled = Column(Integer)
@@ -264,5 +268,6 @@ class ParticipantFrame(Base):
 class Position(Base):
     __tablename__ = 'position'
 
+    id = Column(BigInteger, primary_key=True)
     x = Column(Integer)
     y = Column(Integer)
