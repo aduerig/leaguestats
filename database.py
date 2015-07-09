@@ -15,15 +15,25 @@ class MatchDetail(Base):
     matchMode = Column(String)
     matchType = Column(String)
     matchVersion = Column(String)
+    participantIdentities = relationship("ParticipantIdentity", single_parent=True,
+                                         cascade="save-update, merge, delete, delete-orphan", backref="match")
+    participants = relationship("Participant", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+                                backref="match")
     platformId = Column(String)
     queueType = Column(String)
     region = Column(String)
     season = Column(String)
+    teams = relationship("Team", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+                         backref="match")
+    timeline = relationship("Timeline", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+                            backref="match")
 
 # Set relation
 class Participant(Base):
     __tablename__ = 'participant'
 
+    id = Column(BigInteger, primary_key=True)
+    matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     championId = Column(Integer)
     highestAchievedSeasonTier = Column(String)
     participantId = Column(Integer)
@@ -35,12 +45,16 @@ class Participant(Base):
 class ParticipantIdentity(Base):
     __tablename__ = 'participant_identity'
 
+    id = Column(BigInteger, primary_key=True)
+    matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     participantId = Column(Integer)
 
 
 class Team(Base):
     __tablename__ = 'team'
 
+    id = Column(BigInteger, primary_key=True)
+    matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     baronKills = Column(Integer)
     dominionVictoryScore = Column(BigInteger)
     dragonKills = Column(Integer)
@@ -59,6 +73,8 @@ class Team(Base):
 class Timeline(Base):
     __tablename__ = 'timeline'
 
+    id = Column(BigInteger, primary_key=True)
+    matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     frameInterval = Column(BigInteger)
 
 
