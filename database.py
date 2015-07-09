@@ -46,8 +46,8 @@ class Participant(Base):
     stats = relationship("ParticipantStats", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
                          backref="participant")
     teamId = Column(Integer)
-    timeline = relationship("ParticipantTimeline", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
-                            backref="participant")
+    timeline = relationship("ParticipantTimeline", single_parent=True,
+                            cascade="save-update, merge, delete, delete-orphan", backref="participant")
 
 # Add relations
 class ParticipantIdentity(Base):
