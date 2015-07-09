@@ -1,4 +1,7 @@
-class GetStats():
+class GetStats:
+    def __init__(self, jsonobj):
+        self.jsonobj = jsonobj
+
     def returnMatchDetail(self, jsonobj):
         newdict = {}
         for key in jsonobj:
@@ -53,7 +56,7 @@ class GetStats():
                 newdict[key] = jsonobj[key]
         return newdict
 
-    def returnRune(jsonobj):
+    def returnRune(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             newdict[key] = jsonobj[key]
@@ -104,104 +107,98 @@ class GetStats():
             newdict[key] = jsonobj[key]
         return newdict
 
-    def returnAssistingParticipantIds(self, listint):
-        newdict = {}
-        for key in listint:
-            newdict[str(key)] = key
-        return newdict
 
 
-
-    def returnEventList(self, jsonobj):
+    def returnEventList(self):
         arr = []
-        for x in jsonobj['timeline']['frames']:
+        for x in self.jsonobj['timeline']['frames']:
             if 'events' in x:
                 for j in x['events']:
                     arr.append(self.returnEvent(j))
         return arr
 
-    def returnParticipantList(self, jsonobj):
+    def returnParticipantList(self):
         arr = []
-        for x in jsonobj['participants']:
+        for x in self.jsonobj['participants']:
             arr.append(self.returnParticipant(x))
         return arr
 
-    def returnParticipantIdentityList(self, jsonobj):
+    def returnParticipantIdentityList(self):
         arr = []
-        for x in jsonobj['participantIdentities']:
+        for x in self.jsonobj['participantIdentities']:
             arr.append(self.returnParticipantIdentity(x))
         return arr
 
-    def returnTeamList(self, jsonobj):
+    def returnTeamList(self):
         arr = []
-        for x in jsonobj['teams']:
+        for x in self.jsonobj['teams']:
             arr.append(self.returnTeam(x))
         return arr
 
-    def returnMasteryList(self, jsonobj):
+    def returnMasteryList(self):
         arr = []
-        for x in jsonobj['participants']:
+        for x in self.jsonobj['participants']:
             for j in x['masteries']:
                 arr.append(self.returnMastery(j))
         return arr
 
-    def returnParticipantStatsList(self, jsonobj):
+    def returnParticipantStatsList(self):
         arr = []
-        for x in jsonobj['participants']:
+        for x in self.jsonobj['participants']:
             arr.append(self.returnParticipantStats(x['stats']))
         return arr
 
-    def returnParticipantTimelineList(self, jsonobj):
+    def returnParticipantTimelineList(self):
         arr = []
-        for x in jsonobj['participants']:
+        for x in self.jsonobj['participants']:
             arr.append(self.returnParticipantTimeline(x['timeline']))
         return arr
 
-    def returnRuneList(self, jsonobj):
+    def returnRuneList(self):
         arr = []
-        for x in jsonobj['participants']:
+        for x in self.jsonobj['participants']:
             for j in x['runes']:
                 arr.append(self.returnRune(j))
         return arr
 
-    def returnPlayerList(self, jsonobj):
+    def returnPlayerList(self):
         arr = []
-        for x in jsonobj['participantIdentities']:
+        for x in self.jsonobj['participantIdentities']:
             arr.append(self.returnPlayer(x['player']))
         return arr
 
-    def returnBannedChampionList(self, jsonobj):
+    def returnBannedChampionList(self):
         arr = []
-        for x in jsonobj['teams']:
+        for x in self.jsonobj['teams']:
             for j in x['bans']:
                 arr.append(self.returnBannedChampion(j))
         return arr
 
-    def returnFrameList(self, jsonobj): # there may be something wrong in this function
+    def returnFrameList(self): # there may be something wrong in this function
         arr = []
-        for x in jsonobj['timeline']['frames']:
+        for x in self.jsonobj['timeline']['frames']:
             arr.append(self.returnFrame(x))
         return arr
 
-    def returnParticipantTimelineDataList(self, jsonobj): # there may be something wrong in this function
+    def returnParticipantTimelineDataList(self): # there may be something wrong in this function
         arr = []
-        for x in jsonobj['participants']:
+        for x in self.jsonobj['participants']:
             for j in x['timeline']:
                 if((j != 'role') & (j != 'lane')):
                     arr.append(self.returnParticipantTimelineData(x))
         return arr
 
-    def returnParticipantFrameList(self, jsonobj): # there may be something wrong in this function
+    def returnParticipantFrameList(self): # there may be something wrong in this function
         arr = []
-        for x in jsonobj['timeline']['frames']:
+        for x in self.jsonobj['timeline']['frames']:
             if 'participantFrames' in x:
                 for j in range(1, 10):
                     arr.append(self.returnParticipantFrame(x['participantFrames'][str(j)]))
         return arr
 
-    def returnPositionList(self, jsonobj):
+    def returnPositionList(self):
         arr = []
-        for x in jsonobj['timeline']['frames']:
+        for x in self.jsonobj['timeline']['frames']:
             if 'participantFrames' in x:
                 for j in range(1, 10):
                     arr.append(self.returnPosition(x['participantFrames'][str(j)]))

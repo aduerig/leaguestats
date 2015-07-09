@@ -15,9 +15,6 @@ import csv
 myKey = '70f53e5d-eea1-46f0-9e8a-19889489902f'
 
 
-
-
-
 #nsample = 100
 #x = numpy.linspace(0, 10, 100)
 #X = numpy.column_stack((x, x**2))
@@ -72,42 +69,43 @@ gameName = teamName + ' Match ' + str(dataT[teamId]['matchHistory'][0]['gameId']
 dataG = getLink('dank', gameName, '/Challenger Stats/' + teamName + '/' + str(dataT[teamId]['matchHistory'][0]['gameId']) + '/')
 gameId = str(dataT[teamId]['matchHistory'][0]['gameId'])
 
+statGetter = GetStats(dataG)
 
 
-print(GetStats.returnMatchDetail(dataG))
-print(GetStats.returnParticipant(dataG['participants'][0]))
-print(GetStats.returnParticipantIdentity(dataG['participantIdentities'][0]))
-print(GetStats.returnTeam(dataG['teams'][0]))
-print(GetStats.returnTimeline(dataG['timeline']))
-print(GetStats.returnMastery(dataG['participants'][0]['masteries'][0]))
-print(GetStats.returnParticipantStats(dataG['participants'][0]['stats']))
-print(GetStats.returnParticipantTimeline(dataG['participants'][0]['timeline']))
-print(GetStats.returnRune(dataG['participants'][0]['runes'][0]))
-print(GetStats.returnPlayer(dataG['participantIdentities'][0]['player']))
-print(GetStats.returnBannedChampion(dataG['teams'][0]['bans'][0]))
-print(GetStats.returnFrame(dataG['timeline']['frames'][0]))
-print(GetStats.returnParticipantTimelineData(dataG['participants'][0]['timeline']['csDiffPerMinDeltas']))
-print(GetStats.returnEvent(dataG['timeline']['frames'][1]['events'][0]))
-print(GetStats.returnParticipantFrame(dataG['timeline']['frames'][1]['participantFrames']['1']))
-print(GetStats.returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']))
+# print(statGetter.returnMatchDetail(dataG))
+# print(statGetter.returnParticipant(dataG['participants'][0]))
+# print(statGetter.returnParticipantIdentity(dataG['participantIdentities'][0]))
+# print(statGetter.returnTeam(dataG['teams'][0]))
+# print(statGetter.returnTimeline(dataG['timeline']))
+# print(statGetter.returnMastery(dataG['participants'][0]['masteries'][0]))
+# print(statGetter.returnParticipantStats(dataG['participants'][0]['stats']))
+# print(statGetter.returnParticipantTimeline(dataG['participants'][0]['timeline']))
+# print(statGetter.returnRune(dataG['participants'][0]['runes'][0]))
+# print(statGetter.returnPlayer(dataG['participantIdentities'][0]['player']))
+# print(statGetter.returnBannedChampion(dataG['teams'][0]['bans'][0]))
+# print(statGetter.returnFrame(dataG['timeline']['frames'][0]))
+# print(statGetter.returnParticipantTimelineData(dataG['participants'][0]['timeline']['csDiffPerMinDeltas']))
+# print(statGetter.returnEvent(dataG['timeline']['frames'][1]['events'][0]))
+# print(statGetter.returnParticipantFrame(dataG['timeline']['frames'][1]['participantFrames']['1']))
+# print(statGetter.returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']))
 
 
-print(GetStats.returnEventList(dataG))
-print(GetStats.returnParticipantList(dataG))
-print(GetStats.returnParticipantIdentityList(dataG))
-print(GetStats.returnTeamList(dataG))
-print(GetStats.returnMasteryList(dataG))
-print(GetStats.returnParticipantStatsList(dataG))
-print(GetStats.returnParticipantTimelineList(dataG))
-print(GetStats.returnRuneList(dataG))
-print(GetStats.returnPlayerList(dataG))
-print(GetStats.returnBannedChampionList(dataG))
-print(GetStats.returnFrameList(dataG))
-print(GetStats.returnParticipantTimelineDataList(dataG))
-print(GetStats.returnParticipantFrameList(dataG))
-print(GetStats.returnPositionList(dataG))
+print(statGetter.returnEventList())
+print(statGetter.returnParticipantList())
+print(statGetter.returnParticipantIdentityList())
+print(statGetter.returnTeamList())
+print(statGetter.returnMasteryList())
+print(statGetter.returnParticipantStatsList())
+print(statGetter.returnParticipantTimelineList())
+print(statGetter.returnRuneList())
+print(statGetter.returnPlayerList())
+print(statGetter.returnBannedChampionList())
+print(statGetter.returnFrameList())
+print(statGetter.returnParticipantTimelineDataList())
+print(statGetter.returnParticipantFrameList())
+print(statGetter.returnPositionList())
 
-print(GetStats.returnFrameList(dataG))
+print(statGetter.returnFrameList())
 
 print('\n')
 
