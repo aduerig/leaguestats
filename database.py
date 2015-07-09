@@ -96,7 +96,7 @@ class Mastery(Base):
     __tablename__ = 'mastery'
 
     id = Column(BigInteger, primary_key=True)
-    participantId = Column(BigInteger, ForeignKey('participant.id'))
+    participant_id = Column(BigInteger, ForeignKey('participant.id'))
     masteryId = Column(BigInteger)
     rank = Column(BigInteger)
 
@@ -105,7 +105,7 @@ class ParticipantStats(Base):
     __tablename__ = 'participant_stats'
 
     id = Column(BigInteger, primary_key=True)
-    participantId = Column(BigInteger, ForeignKey('participant.id'))
+    participant_id = Column(BigInteger, ForeignKey('participant.id'))
     assists = Column(BigInteger)
     champLevel = Column(BigInteger)
     combatPlayerScore = Column(BigInteger)
@@ -174,7 +174,41 @@ class ParticpantTimeline(Base):
     __tablename__ = 'participant_timeline'
 
     id = Column(BigInteger, primary_key=True)
-    participantId = Column(BigInteger, ForeignKey('participant.id'))
+    participant_id = Column(BigInteger, ForeignKey('participant.id'))
+    ancientGolemAssistsPerMinCounts = relationship("AncientGolemAssistsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    ancientGolemKillsPerMinCounts = relationship("AncientGolemKillsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    assistedLaneDeathsPerMinDeltas = relationship("AssistedLaneDeathsPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    assistedLaneKillsPerMinDeltas = relationship("AssistedLaneKillsPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    baronAssistsPerMinCounts = relationship("BaronAssistsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    baronKillsPerMinCounts = relationship("BaronKillsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    creepsPerMinDeltas = relationship("CreepsPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    csDiffPerMinDeltas = relationship("CsDiffPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    damageTakenDiffPerMinDeltas = relationship("DamageTakenDiffPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    damageTakenPerMinDeltas = relationship("DamageTakenPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    dragonAssistsPerMinCounts = relationship("DragonAssistsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    dragonKillsPerMinCounts = relationship("DragonKillsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    elderLizardAssistsPerMinCounts = relationship("ElderLizardAssistsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    elderLizardKillsPerMinCounts = relationship("ElderLizardKillsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    goldPerMinDeltas = relationship("GoldPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    inhibitorAssistsPerMinCounts = relationship("InhibitorAssistsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    inhibitorKillsPerMinCounts = relationship("InhibitorKillsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
     lane = Column(String)
     role = Column(String)
 
@@ -183,7 +217,7 @@ class Rune(Base):
     __tablename__ = 'rune'
 
     id = Column(BigInteger, primary_key=True)
-    participantId = Column(BigInteger, ForeignKey('participant.id'))
+    participant_id = Column(BigInteger, ForeignKey('participant.id'))
     rank = Column(BigInteger)
     runeId = Column(BigInteger)
 
@@ -202,7 +236,7 @@ class BannedChampion(Base):
     __tablename__ = 'banned_champion'
 
     id = Column(BigInteger, primary_key=True)
-    teamId = Column(BigInteger, ForeignKey('team.id'))
+    team_id = Column(BigInteger, ForeignKey('team.id'))
     championId = Column(Integer)
     pickTurn = Column(Integer)
 
@@ -211,12 +245,252 @@ class Frame(Base):
     __tablename__ = 'frame'
 
     id = Column(BigInteger, primary_key=True)
-    timelineId = Column(BigInteger, ForeignKey('timeline.id'))
+    timeline_id = Column(BigInteger, ForeignKey('timeline.id'))
     timestamp = Column(BigInteger)
 
 
-class ParticipantTimelineData(Base):
-    __tablename__ = 'participant_timeline_data'
+class AncientGolemAssistsPerMinCounts(Base):
+    __tablename__ = 'ancient_golem_assists_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class AncientGolemKillsPerMinCounts(Base):
+    __tablename__ = 'ancient_golem_kills_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class AssistedLaneDeathsPerMinDeltas(Base):
+    __tablename__ = 'assisted_lane_deaths_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class AssistedLaneKillsPerMinDeltas(Base):
+    __tablename__ = 'assisted_lane_kills_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class BaronAssistsPerMinCounts(Base):
+    __tablename__ = 'baron_assists_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class BaronKillsPerMinCounts(Base):
+    __tablename__ = 'baron_kills_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class CreepsPerMinDeltas(Base):
+    __tablename__ = 'creeps_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class CsDiffPerMinDeltas(Base):
+    __tablename__ = 'cs_diff_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class DamageTakenDiffPerMinDeltas(Base):
+    __tablename__ = 'damage_taken_diff_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class DamageTakenPerMinDeltas(Base):
+    __tablename__ = 'damage_taken_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class DragonAssistsPerMinCounts(Base):
+    __tablename__ = 'dragon_assists_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class DragonKillsPerMinCounts(Base):
+    __tablename__ = 'dragon_kills_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class ElderLizardAssistsPerMinCounts(Base):
+    __tablename__ = 'elder_lizard_assists_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class ElderLizardKillsPerMinCounts(Base):
+    __tablename__ = 'elder_lizard_kills_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class GoldPerMinDeltas(Base):
+    __tablename__ = 'gold_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class InhibitorAssistsPerMinCounts(Base):
+    __tablename__ = 'inhibitor_assists_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class InhibitorKillsPerMinCounts(Base):
+    __tablename__ = 'inhibitor_kills_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class TowerAssistsPerMinCounts(Base):
+    __tablename__ = 'tower_assists_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class TowerKillsPerMinCounts(Base):
+    __tablename__ = 'tower_kills_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class TowerKillsPerMinDeltas(Base):
+    __tablename__ = 'tower_kills_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class VilemawAssistsPerMinCounts(Base):
+    __tablename__ = 'vilemaw_assists_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class VilemawKillsPerMinCounts(Base):
+    __tablename__ = 'vilemaw_kills_per_min_counts'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class WardsPerMinDeltas(Base):
+    __tablename__ = 'wards_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class XpDiffPerMinDeltas(Base):
+    __tablename__ = 'xp_diff_per_min_deltas'
+
+    id = Column(BigInteger, primary_key=True)
+    tenToTwenty = Column(Float)
+    thirtyToEnd = Column(Float)
+    twentyToThirty = Column(Float)
+    zeroToTen = Column(Float)
+
+
+class XpPerMinDeltas(Base):
+    __tablename__ = 'xp_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
     tenToTwenty = Column(Float)
