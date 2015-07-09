@@ -170,7 +170,7 @@ class ParticipantStats(Base):
     winner = Column(Boolean)
 
 
-class ParticpantTimeline(Base):
+class ParticipantTimeline(Base):
     __tablename__ = 'participant_timeline'
 
     id = Column(BigInteger, primary_key=True)
