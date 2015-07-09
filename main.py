@@ -22,12 +22,6 @@ myKey = '70f53e5d-eea1-46f0-9e8a-19889489902f'
 #e = numpy.random.normal(size=nsample)
 #print(e)
 
-
-global callsPerTen
-global calls
-callsPerTen = 5
-calls = 0
-
 def stopwatch(seconds):
     start = time.time()
     time.clock()
@@ -75,9 +69,81 @@ gameName = teamName + ' Match ' + str(dataT[teamId]['matchHistory'][0]['gameId']
 dataG = getLink('dank', gameName, '/Challenger Stats/' + teamName + '/' + str(dataT[teamId]['matchHistory'][0]['gameId']) + '/')
 gameId = str(dataT[teamId]['matchHistory'][0]['gameId'])
 
+
+def returnMatchDetail(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key != 'participantIdentities') & (key != 'participants')  & (key != 'teams') & (key != 'timeline')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnParticipant(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key != 'masteries') & (key != 'runes')  & (key != 'stats') & (key != 'timeline')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnParticipantIdentity(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key != 'player')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnTeam(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key != 'bans')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnTimeline(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key != 'frames')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnMastery(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        newdict[key] = jsonobj[key]
+    return newdict
+
+def returnParticipantStats(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        newdict[key] = jsonobj[key]
+    return newdict
+
+def returnParticipantTimeline(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        if((key == 'lane') | (key == 'role')):
+            newdict[key] = jsonobj[key]
+    return newdict
+
+def returnRune(jsonobj):
+    newdict = {}
+    for key in jsonobj:
+        newdict[key] = jsonobj[key]
+    return newdict
+
+print(returnMatchDetail(dataG))
+print(returnParticipant(dataG['participants'][0]))
+print(returnParticipantIdentity(dataG['participantIdentities'][0]))
+print(returnTeam(dataG['teams'][0]))
+print(returnTimeline(dataG['timeline']))
+print(returnMastery(dataG['participants'][0]['masteries'][0]))
+print(returnParticipantStats(dataG['participants'][0]['stats']))
+print(returnParticipantTimeline(dataG['participants'][0]['timeline']))
+print(returnRune(dataG['participants'][0]['runes'][0]))
+
 print('\n')
 
 
+"""
 if(dataG["teams"][0]['teamId'] == 100):
     blueTeam = dataG["teams"][0]
     purpleTeam = dataG["teams"][1]
@@ -94,7 +160,7 @@ print(dataG['timeline']['frames'][1])
 
 with open('/Challenger Stats/' + teamName + '/' + gameId + '/' + gameName + ' random ass stats' + '.txt', 'w') as outfile:
     json.dump(dataG['timeline']['frames'][1],  outfile, indent=4, separators=(',', ': '))
-
+"""
 
 
 print('\n')
