@@ -191,14 +191,16 @@ print(returnParticipantStats(dataG['participants'][0]['stats']))
 print(returnParticipantTimeline(dataG['participants'][0]['timeline']))
 print(returnRune(dataG['participants'][0]['runes'][0]))
 print(returnPlayer(dataG['participantIdentities'][0]['player']))
-print(returnPlayer(dataG['participantIdentities'][0]['player']))
 print(returnBannedChampion(dataG['teams'][0]['bans'][0]))
 print(returnFrame(dataG['timeline']['frames'][0]))
 print(returnParticipantTimelineData(dataG['participants'][0]['timeline']['csDiffPerMinDeltas']))
 print(returnEvent(dataG['timeline']['frames'][1]['events'][0]))
 print(returnParticipantFrame(dataG['timeline']['frames'][1]['participantFrames']['1']))
 print(returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']))
-print(dataG['timeline']['frames'][1]['events'][0])
+
+
+print()
+
 #print(returnAssistingParticipantIds(dataG['timeline']['frames'][1]['participantFrames']['1']['position']))
 
 def returnEventList(jsonobj):
@@ -209,7 +211,107 @@ def returnEventList(jsonobj):
                 arr.append(returnEvent(j))
     return arr
 
+def returnParticipantList(jsonobj):
+    arr = []
+    for x in jsonobj['participants']:
+        arr.append(returnParticipant(x))
+    return arr
+
+def returnParticipantIdentityList(jsonobj):
+    arr = []
+    for x in jsonobj['participantIdentities']:
+        arr.append(returnParticipantIdentity(x))
+    return arr
+
+def returnTeamList(jsonobj):
+    arr = []
+    for x in jsonobj['teams']:
+        arr.append(returnTeam(x))
+    return arr
+
+def returnMasteryList(jsonobj):
+    arr = []
+    for x in jsonobj['participants']:
+        for j in x['masteries']:
+            arr.append(returnMastery(j))
+    return arr
+
+def returnParticipantStatsList(jsonobj):
+    arr = []
+    for x in jsonobj['participants']:
+        arr.append(returnParticipantStats(x['stats']))
+    return arr
+
+def returnParticipantTimelineList(jsonobj):
+    arr = []
+    for x in jsonobj['participants']:
+        arr.append(returnParticipantTimeline(x['timeline']))
+    return arr
+
+def returnRuneList(jsonobj):
+    arr = []
+    for x in jsonobj['participants']:
+        for j in x['runes']:
+            arr.append(returnRune(j))
+    return arr
+
+def returnPlayerList(jsonobj):
+    arr = []
+    for x in jsonobj['participantIdentities']:
+        arr.append(returnPlayer(x['player']))
+    return arr
+
+def returnBannedChampionList(jsonobj):
+    arr = []
+    for x in jsonobj['teams']:
+        for j in x['bans']:
+            arr.append(returnBannedChampion(j))
+    return arr
+
+def returnFrameList(jsonobj): # there may be something wrong in this function
+    arr = []
+    for x in jsonobj['timeline']['frames']:
+        arr.append(returnFrame(x))
+    return arr
+
+def returnParticipantTimelineDataList(jsonobj): # there may be something wrong in this function
+    arr = []
+    for x in jsonobj['participants']:
+        for j in x['timeline']:
+            if((j != 'role') & (j != 'lane')):
+                arr.append(returnParticipantTimelineData(x))
+    return arr
+
+def returnParticipantFrameList(jsonobj): # there may be something wrong in this function
+    arr = []
+    for x in jsonobj['timeline']['frames']:
+        if 'participantFrames' in x:
+            for j in range(1, 10):
+                arr.append(returnParticipantFrame(x['participantFrames'][str(j)]))
+    return arr
+
+def returnPositionList(jsonobj):
+    arr = []
+    for x in jsonobj['timeline']['frames']:
+        if 'participantFrames' in x:
+            for j in range(1, 10):
+                arr.append(returnPosition(x['participantFrames'][str(j)]))
+    return arr
+
 print(returnEventList(dataG))
+print(returnParticipantList(dataG))
+print(returnParticipantIdentityList(dataG))
+print(returnTeamList(dataG))
+print(returnMasteryList(dataG))
+print(returnParticipantStatsList(dataG))
+print(returnParticipantTimelineList(dataG))
+print(returnRuneList(dataG))
+print(returnPlayerList(dataG))
+print(returnBannedChampionList(dataG))
+print(returnFrameList(dataG))
+print(returnParticipantTimelineDataList(dataG))
+print(returnParticipantFrameList(dataG))
+print(returnPositionList(dataG))
 
 print('\n')
 
