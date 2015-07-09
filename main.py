@@ -175,6 +175,12 @@ def returnPosition(jsonobj):
         newdict[key] = jsonobj[key]
     return newdict
 
+def returnAssistingParticipantIds(listint):
+    newdict = {}
+    for key in listint:
+        newdict[str(key)] = key
+    return newdict
+
 print(returnMatchDetail(dataG))
 print(returnParticipant(dataG['participants'][0]))
 print(returnParticipantIdentity(dataG['participantIdentities'][0]))
@@ -192,7 +198,18 @@ print(returnParticipantTimelineData(dataG['participants'][0]['timeline']['csDiff
 print(returnEvent(dataG['timeline']['frames'][1]['events'][0]))
 print(returnParticipantFrame(dataG['timeline']['frames'][1]['participantFrames']['1']))
 print(returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']))
-print(returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']['position']))
+print(dataG['timeline']['frames'][1]['events'][0])
+#print(returnAssistingParticipantIds(dataG['timeline']['frames'][1]['participantFrames']['1']['position']))
+
+def returnEventList(jsonobj):
+    arr = []
+    for x in jsonobj['timeline']['frames']:
+        if 'events' in x:
+            for j in x['events']:
+                arr.append(returnEvent(j))
+    return arr
+
+print(returnEventList(dataG))
 
 print('\n')
 
