@@ -28,6 +28,7 @@ class MatchDetail(Base):
     timeline = relationship("Timeline", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
                             backref="match")
 
+
 # Set relation
 class Participant(Base):
     __tablename__ = 'participant'
@@ -48,6 +49,7 @@ class Participant(Base):
     teamId = Column(Integer)
     timeline = relationship("ParticipantTimeline", single_parent=True,
                             cascade="save-update, merge, delete, delete-orphan", backref="participant")
+
 
 # Add relations
 class ParticipantIdentity(Base):
@@ -88,6 +90,7 @@ class Timeline(Base):
     frameInterval = Column(BigInteger)
     frames = relationship("Frame", single_parent=True,
                           cascade="save-update, merge, delete, delete-orphan", backref="timeline")
+
 
 class Mastery(Base):
     __tablename__ = 'mastery'
