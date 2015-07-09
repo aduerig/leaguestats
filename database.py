@@ -211,6 +211,22 @@ class ParticpantTimeline(Base):
                           cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
     lane = Column(String)
     role = Column(String)
+    towerAssistsPerMinCounts = relationship("TowerAssistsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    towerKillsPerMinCounts = relationship("TowerKillsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    towerKillsPerMinDeltas = relationship("TowerKillsPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    vilemawAssistsPerMinCounts = relationship("VilemawAssistsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    vilemawKillsPerMinCounts = relationship("VilemawKillsPerMinCounts", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    wardsPerMinDeltas = relationship("WardsPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    xpDiffPerMinDeltas = relationship("XpDiffPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    xpPerMinDeltas = relationship("XpPerMinDeltas", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
 
 
 class Rune(Base):
