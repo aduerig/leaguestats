@@ -63,6 +63,8 @@ class Team(Base):
 
     id = Column(BigInteger, primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
+    bans = relationship("BannedChampion", single_parent=True,
+                        cascade="save-update, merge, delete, delete-orphan", backref="team")
     baronKills = Column(Integer)
     dominionVictoryScore = Column(BigInteger)
     dragonKills = Column(Integer)
@@ -84,7 +86,8 @@ class Timeline(Base):
     id = Column(BigInteger, primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     frameInterval = Column(BigInteger)
-
+    frames = relationship("Frame", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="timeline")
 
 class Mastery(Base):
     __tablename__ = 'mastery'
@@ -194,6 +197,8 @@ class Player(Base):
 class BannedChampion(Base):
     __tablename__ = 'banned_champion'
 
+    id = Column(BigInteger, primary_key=True)
+    teamId = Column(BigInteger, ForeignKey('team.id'))
     championId = Column(Integer)
     pickTurn = Column(Integer)
 
@@ -201,6 +206,8 @@ class BannedChampion(Base):
 class Frame(Base):
     __tablename__ = 'frame'
 
+    id = Column(BigInteger, primary_key=True)
+    timelineId = Column(BigInteger, ForeignKey('timeline.id'))
     timestamp = Column(BigInteger)
 
 
