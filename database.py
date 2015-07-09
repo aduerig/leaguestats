@@ -36,10 +36,18 @@ class Participant(Base):
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     championId = Column(Integer)
     highestAchievedSeasonTier = Column(String)
+    masteries = relationship("Mastery", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+                             backref="participant")
     participantId = Column(Integer)
+    runes = relationship("Rune", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+                         backref="participant")
     spell1Id = Column(Integer)
     spell2Id = Column(Integer)
+    stats = relationship("ParticipantStats", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+                         backref="participant")
     teamId = Column(Integer)
+    timeline = relationship("ParticipantTimeline", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+                            backref="participant")
 
 # Add relations
 class ParticipantIdentity(Base):
@@ -81,6 +89,8 @@ class Timeline(Base):
 class Mastery(Base):
     __tablename__ = 'mastery'
 
+    id = Column(BigInteger, primary_key=True)
+    participantId = Column(BigInteger, ForeignKey('participant.id'))
     masteryId = Column(BigInteger)
     rank = Column(BigInteger)
 
@@ -88,6 +98,8 @@ class Mastery(Base):
 class ParticipantStats(Base):
     __tablename__ = 'participant_stats'
 
+    id = Column(BigInteger, primary_key=True)
+    participantId = Column(BigInteger, ForeignKey('participant.id'))
     assists = Column(BigInteger)
     champLevel = Column(BigInteger)
     combatPlayerScore = Column(BigInteger)
@@ -155,6 +167,8 @@ class ParticipantStats(Base):
 class ParticpantTimeline(Base):
     __tablename__ = 'participant_timeline'
 
+    id = Column(BigInteger, primary_key=True)
+    participantId = Column(BigInteger, ForeignKey('participant.id'))
     lane = Column(String)
     role = Column(String)
 
@@ -162,6 +176,8 @@ class ParticpantTimeline(Base):
 class Rune(Base):
     __tablename__ = 'rune'
 
+    id = Column(BigInteger, primary_key=True)
+    participantId = Column(BigInteger, ForeignKey('participant.id'))
     rank = Column(BigInteger)
     runeId = Column(BigInteger)
 
