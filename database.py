@@ -253,6 +253,7 @@ class AncientGolemAssistsPerMinCounts(Base):
     __tablename__ = 'ancient_golem_assists_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -263,6 +264,7 @@ class AncientGolemKillsPerMinCounts(Base):
     __tablename__ = 'ancient_golem_kills_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -273,6 +275,7 @@ class AssistedLaneDeathsPerMinDeltas(Base):
     __tablename__ = 'assisted_lane_deaths_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -283,6 +286,7 @@ class AssistedLaneKillsPerMinDeltas(Base):
     __tablename__ = 'assisted_lane_kills_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -293,6 +297,7 @@ class BaronAssistsPerMinCounts(Base):
     __tablename__ = 'baron_assists_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -303,6 +308,7 @@ class BaronKillsPerMinCounts(Base):
     __tablename__ = 'baron_kills_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -313,6 +319,7 @@ class CreepsPerMinDeltas(Base):
     __tablename__ = 'creeps_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -323,6 +330,7 @@ class CsDiffPerMinDeltas(Base):
     __tablename__ = 'cs_diff_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -333,6 +341,7 @@ class DamageTakenDiffPerMinDeltas(Base):
     __tablename__ = 'damage_taken_diff_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -343,6 +352,7 @@ class DamageTakenPerMinDeltas(Base):
     __tablename__ = 'damage_taken_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -353,6 +363,7 @@ class DragonAssistsPerMinCounts(Base):
     __tablename__ = 'dragon_assists_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -363,6 +374,7 @@ class DragonKillsPerMinCounts(Base):
     __tablename__ = 'dragon_kills_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -373,6 +385,7 @@ class ElderLizardAssistsPerMinCounts(Base):
     __tablename__ = 'elder_lizard_assists_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -383,6 +396,7 @@ class ElderLizardKillsPerMinCounts(Base):
     __tablename__ = 'elder_lizard_kills_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -393,6 +407,7 @@ class GoldPerMinDeltas(Base):
     __tablename__ = 'gold_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -403,6 +418,7 @@ class InhibitorAssistsPerMinCounts(Base):
     __tablename__ = 'inhibitor_assists_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -413,6 +429,7 @@ class InhibitorKillsPerMinCounts(Base):
     __tablename__ = 'inhibitor_kills_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -423,6 +440,7 @@ class TowerAssistsPerMinCounts(Base):
     __tablename__ = 'tower_assists_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -433,6 +451,7 @@ class TowerKillsPerMinCounts(Base):
     __tablename__ = 'tower_kills_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -443,6 +462,7 @@ class TowerKillsPerMinDeltas(Base):
     __tablename__ = 'tower_kills_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -453,6 +473,7 @@ class VilemawAssistsPerMinCounts(Base):
     __tablename__ = 'vilemaw_assists_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -463,6 +484,7 @@ class VilemawKillsPerMinCounts(Base):
     __tablename__ = 'vilemaw_kills_per_min_counts'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -473,6 +495,7 @@ class WardsPerMinDeltas(Base):
     __tablename__ = 'wards_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -483,6 +506,7 @@ class XpDiffPerMinDeltas(Base):
     __tablename__ = 'xp_diff_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
@@ -493,6 +517,7 @@ class XpPerMinDeltas(Base):
     __tablename__ = 'xp_per_min_deltas'
 
     id = Column(BigInteger, primary_key=True)
+    participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
     twentyToThirty = Column(Float)
