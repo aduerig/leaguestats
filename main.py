@@ -5,6 +5,7 @@
 import requests
 import os.path
 import time
+import json
 from stats import *
 from riotApi import *
 
