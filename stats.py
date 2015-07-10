@@ -9,6 +9,10 @@ class GetStats:
                 newdict[key] = self.jsonobj[key]
         return newdict
 
+
+
+
+
     def returnParticipant(self, jsonobj):
         newdict = {}
         for key in jsonobj:
