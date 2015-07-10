@@ -2,11 +2,11 @@ class GetStats:
     def __init__(self, jsonobj):
         self.jsonobj = jsonobj
 
-    def returnMatchDetail(self, jsonobj):
+    def returnMatchDetail(self):
         newdict = {}
-        for key in jsonobj:
+        for key in self.jsonobj:
             if((key != 'participantIdentities') & (key != 'participants')  & (key != 'teams') & (key != 'timeline')):
-                newdict[key] = jsonobj[key]
+                newdict[key] = self.jsonobj[key]
         return newdict
 
     def returnParticipant(self, jsonobj):
@@ -30,11 +30,11 @@ class GetStats:
                 newdict[key] = jsonobj[key]
         return newdict
 
-    def returnTimeline(self, jsonobj):
+    def returnTimeline(self):
         newdict = {}
-        for key in jsonobj:
+        for key in self.jsonobj:
             if((key != 'frames')):
-                newdict[key] = jsonobj[key]
+                newdict[key] = self.jsonobj[key]
         return newdict
 
     def returnMastery(self, jsonobj):

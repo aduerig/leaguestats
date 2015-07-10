@@ -147,6 +147,8 @@ for g in range(len(dataM['entries'])):
             json.dump(dataT,  outfile, indent=4, separators=(',', ': '))
 
     #Grabs all games form a team (dataT)
+
+
     for j in range(len(dataT[teamId]['matchHistory'])):
         gameId = str(dataT[teamId]['matchHistory'][j]['gameId'])
         gameName = str(teamName + ' Match ' + gameId).replace('\ufb01', '')
@@ -155,6 +157,7 @@ for g in range(len(dataM['entries'])):
 
 
         statGetter = GetStats(dataG)
+        print(statGetter.returnMatchDetail())
         print(statGetter.returnEventList())
         print(statGetter.returnParticipantList())
         print(statGetter.returnParticipantIdentityList())
@@ -170,6 +173,7 @@ for g in range(len(dataM['entries'])):
         print(statGetter.returnParticipantFrameList())
         print(statGetter.returnPositionList())
         print(statGetter.returnFrameList())
+
 
 
         if(j == 0):
