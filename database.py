@@ -58,6 +58,8 @@ class ParticipantIdentity(Base):
     id = Column(BigInteger, primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     participantId = Column(Integer)
+    player = relationship("Player", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="participantIdentity")
 
 
 class Team(Base):
@@ -242,6 +244,7 @@ class Player(Base):
     __tablename__ = 'player'
 
     id = Column(BigInteger, primary_key=True)
+    player_id = Column(BigInteger, ForeignKey('participant_identity.id'))
     matchHistoryUri = Column(String)
     profileIcon = Column(Integer)
     summonerId = Column(BigInteger)
