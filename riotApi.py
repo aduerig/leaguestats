@@ -12,9 +12,10 @@ class RiotApi:
         start = time.time()
         time.clock()
         elapsed = 0
+        print('Waiting 10 seconds to prevent request overflow...')
         while elapsed < seconds:
             elapsed = time.time() - start
-            print("loop cycle time: %f, seconds count: %02d" % (time.clock(), elapsed))
+            # print("loop cycle time: %f, seconds count: %02d" % (time.clock(), elapsed))
             time.sleep(1)
         return
 
@@ -23,8 +24,8 @@ class RiotApi:
             if not os.path.exists(path):
                 os.makedirs(path)
         if not os.path.isfile(path + name + '.json'):
-            print('Getting ' + name + '.json ' + 'from riot')
             self.stopwatch(10)
+            print('Getting ' + name + '.json ' + 'from riot')
             data = json.loads(requests.get(url + self.myKey).text)
             with open(path + name + '.json', 'w') as f:
                 json.dump(data, f)

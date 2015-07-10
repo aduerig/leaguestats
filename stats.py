@@ -15,213 +15,291 @@ class GetStats:
         newdict = {}
         newdict['flat'] = self.returnMatchDetailFlat()
         for key in self.jsonobj:
-            if key == 'participantIdentities':
-                newdict[key] = self.returnParticipantIdentityList()
             if key == 'participants':
-                newdict[key] = self.returnParticipants()
+                nestarrp = []
+                for p in self.jsonobj['participants']:
+                    nestdict = {}
+                    nestdict[key] = self.returnParticipant(p)
+                    nestarrp.append(nestdict)
+                newdict['participants'] = nestarrp
+            if key == 'participantIdentities':
+                nestarrp = []
+                for p in self.jsonobj['participantIdentities']:
+                    nestdict = {}
+                    nestdict[key] = self.returnParticipantIdentity(p)
+                    nestarrp.append(nestdict)
+                newdict['participantIdentities'] = nestarrp
             if key == 'teams':
-                newdict[key] = self.returnparticipantIdentityList()
+                nestarrp = []
+                for p in self.jsonobj['teams']:
+                    nestdict = {}
+                    nestdict[key] = self.returnTeam(p)
+                    nestarrp.append(nestdict)
+                newdict['teams'] = nestarrp
             if key == 'timeline':
-                newdict[key] = self.returnparticipantIdentityList()
+                newdict['timeline'] = self.returnTimeline(self.jsonobj)
         return newdict
 
 
     def returnParticipantFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
-            if((key != 'participantFrames') & (key != 'events')):
+            if((key != 'masteries') & (key != 'runes') & (key != 'stats') & (key != 'timeline') ):
                 newdict[key] = jsonobj[key]
         return newdict
 
-    def returnParticipants(self):
+
+    def returnParticipant(self, jsonobj):
         newdict = {}
-        for x in self.jsonobj['participants']:
-            newdict['flat'] = self.returnParticipantFlat(x)
-        arr = []
-        for x in self.jsonobj['participants']:
-            arr.append(self.returnParticipant(x))
-        return arr
+        newdict['flat'] = self.returnParticipantFlat(jsonobj)
+        for key in jsonobj:
+            if key == 'masteries':
+                nestarrp = []
+                for p in jsonobj['masteries']:
+                    nestdict = {}
+                    nestdict[key] = self.returnMastery(p)
+                    nestarrp.append(nestdict)
+                newdict['masteries'] = nestarrp
+            if key == 'runes':
+                nestarrp = []
+                for p in jsonobj['runes']:
+                    nestdict = {}
+                    nestdict[key] = self.returnRune(p)
+                    nestarrp.append(nestdict)
+                newdict['runes'] = nestarrp
+            if key == 'stats':
+                nestdict = {}
+                nestdict['flat'] = jsonobj['stats']
+                newdict['stats'] = nestdict
+            if key == 'timeline':
+                newdict['timeline'] = self.returnParticipantTimeline(jsonobj)
+        return newdict
 
 
-
-    def returnParticipantIdentity(self, jsonobj):
+    def returnParticipantIdentityFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             if((key != 'player')):
                 newdict[key] = jsonobj[key]
         return newdict
 
-    def returnTeam(self, jsonobj):
+
+    def returnParticipantIdentity(self, jsonobj):
+        newdict = {}
+        newdict['flat'] = self.returnParticipantIdentityFlat(jsonobj)
+        for key in jsonobj:
+            if key == 'player':
+                newdict[key] = self.returnPlayer(jsonobj['player'])
+        return newdict
+
+
+    def returnPlayerFlat(self, jsonobj):
+        newdict = {}
+        for key in jsonobj:
+            newdict[key] = jsonobj[key]
+        return newdict
+
+
+    def returnPlayer(self, jsonobj):  # has no nests
+        newdict = {}
+        newdict['flat'] = self.returnPlayerFlat(jsonobj)
+        return newdict
+
+
+    def returnMasteryFlat(self, jsonobj):
+        newdict = {}
+        for key in jsonobj:
+            newdict[key] = jsonobj[key]
+        return newdict
+
+
+    def returnMastery(self, jsonobj):  # has no nests
+        newdict = {}
+        newdict['flat'] = self.returnMasteryFlat(jsonobj)
+        return newdict
+
+
+    def returnRuneFlat(self, jsonobj):
+        newdict = {}
+        for key in jsonobj:
+            newdict[key] = jsonobj[key]
+        return newdict
+
+
+    def returnRune(self, jsonobj):  # has no nests
+        newdict = {}
+        newdict['flat'] = self.returnRuneFlat(jsonobj)
+        return newdict
+
+
+    def returnParticipantTimelineFlat(self, jsonobj):
+        newdict = {}
+        for key in jsonobj['timeline']:
+            if((key == 'lane') | (key == 'role')):
+                newdict[key] = jsonobj['timeline'][key]
+        return newdict
+
+
+    def returnParticipantTimeline(self, jsonobj):
+        newdict = {}
+        newdict['flat'] = self.returnParticipantTimelineFlat(jsonobj)
+        nestarrp = []
+        for p in jsonobj['timeline']:
+            nestdict = {}
+            if((p != 'lane') | (p != 'role')):
+                nestdict[p] = jsonobj['timeline'][p]
+                nestarrp.append(nestdict)
+        newdict['ParticipantTimelineData'] = nestarrp
+        return newdict
+
+
+    def returnTeamFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             if((key != 'bans')):
                 newdict[key] = jsonobj[key]
         return newdict
 
-    def returnTimeline(self):
+
+    def returnTeam(self, jsonobj):
         newdict = {}
-        for key in self.jsonobj:
-            if((key != 'frames')):
-                newdict[key] = self.jsonobj[key]
+        newdict['flat'] = self.returnTeamFlat(jsonobj)
+        nestarrp = []
+        for key in jsonobj:
+            if key == 'bans':
+                nestarrp = []
+                for p in jsonobj['bans']:
+                    nestdict = {}
+                    nestdict[key] = self.returnBannedChampion(p)
+                    nestarrp.append(nestdict)
+                newdict['bans'] = nestarrp
         return newdict
 
-    def returnMastery(self, jsonobj):
+
+    def returnBannedChampionFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             newdict[key] = jsonobj[key]
         return newdict
 
-    def returnParticipantStats(self, jsonobj):
+
+    def returnBannedChampion(self, jsonobj):  # has no nests
         newdict = {}
-        for key in jsonobj:
-            newdict[key] = jsonobj[key]
+        newdict['flat'] = self.returnBannedChampionFlat(jsonobj)
         return newdict
 
-    def returnParticipantTimeline(self, jsonobj):
+
+    def returnTimelineFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
-            if((key == 'lane') | (key == 'role')):
+            if key == 'frameInterval':
                 newdict[key] = jsonobj[key]
         return newdict
 
-    def returnRune(self, jsonobj):
+
+    def returnTimeline(self, jsonobj):
         newdict = {}
-        for key in jsonobj:
-            newdict[key] = jsonobj[key]
+        newdict['flat'] = self.returnTimelineFlat(jsonobj['timeline'])
+        nestdict = {}
+        for key in jsonobj['timeline']:
+            if key == 'frames':
+                nestarrp = []
+                for p in jsonobj['timeline'][key]:
+                    nestdict = {}
+                    nestdict[key] = self.returnFrame(p)
+                    nestarrp.append(nestdict)
+        newdict['timeline'] = nestarrp
         return newdict
 
-    def returnPlayer(self, jsonobj):
-        newdict = {}
-        for key in jsonobj:
-            newdict[key] = jsonobj[key]
-        return newdict
 
-    def returnBannedChampion(self, jsonobj):
-        newdict = {}
-        for key in jsonobj:
-            newdict[key] = jsonobj[key]
-        return newdict
-
-    def returnFrame(self, jsonobj):
+    def returnFrameFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             if((key != 'participantFrames') & (key != 'events')):
                 newdict[key] = jsonobj[key]
         return newdict
 
-    def returnParticipantTimelineData(self, jsonobj):
+
+    def returnFrame(self, jsonobj):
         newdict = {}
+        newdict['flat'] = self.returnFrameFlat(jsonobj)
         for key in jsonobj:
-            newdict[key] = jsonobj[key]
+            if key == 'events':
+                nestarrp = []
+                for p in jsonobj['events']:
+                    nestdict = {}
+                    nestdict[key] = self.returnEvent(p)
+                    nestarrp.append(nestdict)
+                newdict['events'] = nestarrp
+            if key == 'participantFrames':
+                nestarrp = []
+                for p in jsonobj['participantFrames']:
+                    nestdict = {}
+                    nestdict[key] = self.returnParticipantFrame(jsonobj['participantFrames'])
+                    nestarrp.append(nestdict)
+                newdict['participantFrames'] = nestarrp
         return newdict
 
-    def returnEvent(self, jsonobj):
+
+    def returnEventFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             if((key != 'position') & (key != 'assistingParticipantIds')):
                 newdict[key] = jsonobj[key]
         return newdict
 
-    def returnParticipantFrame(self, jsonobj):
+
+    def returnEvent(self, jsonobj):
         newdict = {}
+        newdict['flat'] = self.returnEventFlat(jsonobj)
         for key in jsonobj:
-            if((key != 'position')):
-                newdict[key] = jsonobj[key]
+            if key == 'position':
+                newdict['position'] = self.returnPosition(jsonobj['position'])
+            if key == 'assistingParticipantIds':  # fix
+                newdict['assistingParticipantIds'] = self.returnAssistingParticipantId(jsonobj['assistingParticipantIds'])
         return newdict
 
-    def returnPosition(self, jsonobj):
+
+    def returnPositionFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             newdict[key] = jsonobj[key]
         return newdict
 
 
+    def returnPosition(self, jsonobj):  # has no nests
+        newdict = {}
+        newdict['flat'] = self.returnFrameFlat(jsonobj)
+        return newdict
 
-    def returnEventList(self):
-        arr = []
-        for x in self.jsonobj['timeline']['frames']:
-            if 'events' in x:
-                for j in x['events']:
-                    arr.append(self.returnEvent(j))
-        return arr
 
-    def returnParticipantIdentityList(self):
-        arr = []
-        for x in self.jsonobj['participantIdentities']:
-            arr.append(self.returnParticipantIdentity(x))
-        return arr
+    def returnAssistingParticipantIdFlat(self, jsonobj):
+        pass
+        # newdict = {}
+        # print(jsonobj)
+        # for key in jsonobj:
+        #     newdict[key] = jsonobj[key]
+        # return newdict
 
-    def returnTeamList(self):
-        arr = []
-        for x in self.jsonobj['teams']:
-            arr.append(self.returnTeam(x))
-        return arr
 
-    def returnMasteryList(self):
-        arr = []
-        for x in self.jsonobj['participants']:
-            for j in x['masteries']:
-                arr.append(self.returnMastery(j))
-        return arr
+    def returnAssistingParticipantId(self, jsonobj):  # has no nests
+        # newdict = {}
+        # newdict['flat'] = self.returnAssistingParticipantIdFlat(jsonobj)
+        return jsonobj
 
-    def returnParticipantStatsList(self):
-        arr = []
-        for x in self.jsonobj['participants']:
-            arr.append(self.returnParticipantStats(x['stats']))
-        return arr
 
-    def returnParticipantTimelineList(self):
-        arr = []
-        for x in self.jsonobj['participants']:
-            arr.append(self.returnParticipantTimeline(x['timeline']))
-        return arr
+    def returnParticipantFrameFlat(self, jsonobj):
+        newdict = {}
+        for key in jsonobj:
+            if((key != 'position')):
+                newdict[key] = jsonobj[key]
+        return newdict
 
-    def returnRuneList(self):
-        arr = []
-        for x in self.jsonobj['participants']:
-            for j in x['runes']:
-                arr.append(self.returnRune(j))
-        return arr
 
-    def returnPlayerList(self):
-        arr = []
-        for x in self.jsonobj['participantIdentities']:
-            arr.append(self.returnPlayer(x['player']))
-        return arr
-
-    def returnBannedChampionList(self):
-        arr = []
-        for x in self.jsonobj['teams']:
-            for j in x['bans']:
-                arr.append(self.returnBannedChampion(j))
-        return arr
-
-    def returnFrameList(self): # there may be something wrong in this function
-        arr = []
-        for x in self.jsonobj['timeline']['frames']:
-            arr.append(self.returnFrame(x))
-        return arr
-
-    def returnParticipantTimelineDataList(self): # there may be something wrong in this function
-        arr = []
-        for x in self.jsonobj['participants']:
-            for j in x['timeline']:
-                if((j != 'role') & (j != 'lane')):
-                    arr.append(self.returnParticipantTimelineData(x))
-        return arr
-
-    def returnParticipantFrameList(self): # there may be something wrong in this function
-        arr = []
-        for x in self.jsonobj['timeline']['frames']:
-            if 'participantFrames' in x:
-                for j in range(1, 10):
-                    arr.append(self.returnParticipantFrame(x['participantFrames'][str(j)]))
-        return arr
-
-    def returnPositionList(self):
-        arr = []
-        for x in self.jsonobj['timeline']['frames']:
-            if 'participantFrames' in x:
-                for j in range(1, 10):
-                    arr.append(self.returnPosition(x['participantFrames'][str(j)]))
-        return arr
+    def returnParticipantFrame(self, jsonobj): # there may be something wrong in this function
+        newdict = {}
+        newdict['flat'] = self.returnParticipantFrameFlat(jsonobj)
+        for key in jsonobj:
+            if key == 'position':
+                newdict['position'] = self.returnPosition(jsonobj['position'])
+        return newdict

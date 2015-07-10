@@ -172,11 +172,24 @@ api = RiotApi('70f53e5d-eea1-46f0-9e8a-19889489902f')
 dataC = api.getchallenger()
 
 # Outer loop running through all challenger teams (dataM)
+x = 0
 for g in dataC['entries']:
+    y = 0
     dataT = api.getteam(g['playerOrTeamName'])
     # Grabs all games form a team (dataT)
     for j in dataT['matchHistory']:
         dataM = api.getmatch(g['playerOrTeamName'], str(j['gameId']))
+        statgetter = GetStats(dataM)
+        realdata = statgetter.returnMatchDetail()
+        with open('/Challenger Stats/test.txt', 'w') as outfile:
+            json.dump(realdata,  outfile, indent=4, separators=(',', ': '))
+        if x == 0:
+            break
+        x += 1
+    if y == 0:
+        break
+    y += 1
+
 
 # print(dataM.keys())
 # print(len(dataM['entries']))

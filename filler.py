@@ -11,7 +11,8 @@ class Filler:
         Base.metadata.create_all(self.engine, checkfirst=True)
 
     def helloWorld(self):
-        print("heyyo")
+        pass
+        # print("heyyo")
 
 filler = Filler()
 
