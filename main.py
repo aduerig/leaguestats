@@ -183,6 +183,7 @@ for g in dataC['entries']:
         realdata = statgetter.returnMatchDetail()
         with open('/Challenger Stats/test.txt', 'w') as outfile:
             json.dump(realdata,  outfile, indent=4, separators=(',', ': '))
+        # print(realdata)
         if x == 0:
             break
         x += 1
