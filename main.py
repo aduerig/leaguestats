@@ -3,13 +3,10 @@
 #Key end
 
 import requests
-import json
 import os.path
 import time
 from stats import *
-import csv
-#import numpy
-#import statsmodels.api as sm
+from riotApi import *
 
 
 myKey = '70f53e5d-eea1-46f0-9e8a-19889489902f'
