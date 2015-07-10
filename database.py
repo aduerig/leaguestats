@@ -41,7 +41,7 @@ class MatchDetail(Base):
 class Participant(Base):
     __tablename__ = 'participant'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     championId = Column(Integer)
     highestAchievedSeasonTier = Column(String)
@@ -71,7 +71,7 @@ class Participant(Base):
 class ParticipantIdentity(Base):
     __tablename__ = 'participant_identity'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     participantId = Column(Integer)
     player = relationship("Player",
@@ -83,7 +83,7 @@ class ParticipantIdentity(Base):
 class Team(Base):
     __tablename__ = 'team'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     bans = relationship("BannedChampion",
                         single_parent=True,
@@ -107,7 +107,7 @@ class Team(Base):
 class Timeline(Base):
     __tablename__ = 'timeline'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     frameInterval = Column(BigInteger)
     frames = relationship("Frame",
@@ -119,7 +119,7 @@ class Timeline(Base):
 class Mastery(Base):
     __tablename__ = 'mastery'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participant_id = Column(BigInteger, ForeignKey('participant.id'))
     masteryId = Column(BigInteger)
     rank = Column(BigInteger)
@@ -128,7 +128,7 @@ class Mastery(Base):
 class ParticipantStats(Base):
     __tablename__ = 'participant_stats'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participant_id = Column(BigInteger, ForeignKey('participant.id'))
     assists = Column(BigInteger)
     champLevel = Column(BigInteger)
@@ -197,7 +197,7 @@ class ParticipantStats(Base):
 class ParticipantTimeline(Base):
     __tablename__ = 'participant_timeline'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participant_id = Column(BigInteger, ForeignKey('participant.id'))
     ancientGolemAssistsPerMinCounts = relationship("AncientGolemAssistsPerMinCounts",
                                                    single_parent=True,
@@ -305,7 +305,7 @@ class ParticipantTimeline(Base):
 class Rune(Base):
     __tablename__ = 'rune'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participant_id = Column(BigInteger, ForeignKey('participant.id'))
     rank = Column(BigInteger)
     runeId = Column(BigInteger)
@@ -314,7 +314,7 @@ class Rune(Base):
 class Player(Base):
     __tablename__ = 'player'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     player_id = Column(BigInteger, ForeignKey('participant_identity.id'))
     matchHistoryUri = Column(String)
     profileIcon = Column(Integer)
@@ -325,7 +325,7 @@ class Player(Base):
 class BannedChampion(Base):
     __tablename__ = 'banned_champion'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     team_id = Column(BigInteger, ForeignKey('team.id'))
     championId = Column(Integer)
     pickTurn = Column(Integer)
@@ -334,7 +334,7 @@ class BannedChampion(Base):
 class Frame(Base):
     __tablename__ = 'frame'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     timeline_id = Column(BigInteger, ForeignKey('timeline.id'))
     events = relationship("Event",
                           single_parent=True,
@@ -350,7 +350,7 @@ class Frame(Base):
 class AncientGolemAssistsPerMinCounts(Base):
     __tablename__ = 'ancient_golem_assists_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -361,7 +361,7 @@ class AncientGolemAssistsPerMinCounts(Base):
 class AncientGolemKillsPerMinCounts(Base):
     __tablename__ = 'ancient_golem_kills_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -372,7 +372,7 @@ class AncientGolemKillsPerMinCounts(Base):
 class AssistedLaneDeathsPerMinDeltas(Base):
     __tablename__ = 'assisted_lane_deaths_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -383,7 +383,7 @@ class AssistedLaneDeathsPerMinDeltas(Base):
 class AssistedLaneKillsPerMinDeltas(Base):
     __tablename__ = 'assisted_lane_kills_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -394,7 +394,7 @@ class AssistedLaneKillsPerMinDeltas(Base):
 class BaronAssistsPerMinCounts(Base):
     __tablename__ = 'baron_assists_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -405,7 +405,7 @@ class BaronAssistsPerMinCounts(Base):
 class BaronKillsPerMinCounts(Base):
     __tablename__ = 'baron_kills_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -416,7 +416,7 @@ class BaronKillsPerMinCounts(Base):
 class CreepsPerMinDeltas(Base):
     __tablename__ = 'creeps_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -427,7 +427,7 @@ class CreepsPerMinDeltas(Base):
 class CsDiffPerMinDeltas(Base):
     __tablename__ = 'cs_diff_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -438,7 +438,7 @@ class CsDiffPerMinDeltas(Base):
 class DamageTakenDiffPerMinDeltas(Base):
     __tablename__ = 'damage_taken_diff_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -449,7 +449,7 @@ class DamageTakenDiffPerMinDeltas(Base):
 class DamageTakenPerMinDeltas(Base):
     __tablename__ = 'damage_taken_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -460,7 +460,7 @@ class DamageTakenPerMinDeltas(Base):
 class DragonAssistsPerMinCounts(Base):
     __tablename__ = 'dragon_assists_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -471,7 +471,7 @@ class DragonAssistsPerMinCounts(Base):
 class DragonKillsPerMinCounts(Base):
     __tablename__ = 'dragon_kills_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -482,7 +482,7 @@ class DragonKillsPerMinCounts(Base):
 class ElderLizardAssistsPerMinCounts(Base):
     __tablename__ = 'elder_lizard_assists_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -493,7 +493,7 @@ class ElderLizardAssistsPerMinCounts(Base):
 class ElderLizardKillsPerMinCounts(Base):
     __tablename__ = 'elder_lizard_kills_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -504,7 +504,7 @@ class ElderLizardKillsPerMinCounts(Base):
 class GoldPerMinDeltas(Base):
     __tablename__ = 'gold_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -515,7 +515,7 @@ class GoldPerMinDeltas(Base):
 class InhibitorAssistsPerMinCounts(Base):
     __tablename__ = 'inhibitor_assists_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -526,7 +526,7 @@ class InhibitorAssistsPerMinCounts(Base):
 class InhibitorKillsPerMinCounts(Base):
     __tablename__ = 'inhibitor_kills_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -537,7 +537,7 @@ class InhibitorKillsPerMinCounts(Base):
 class TowerAssistsPerMinCounts(Base):
     __tablename__ = 'tower_assists_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -548,7 +548,7 @@ class TowerAssistsPerMinCounts(Base):
 class TowerKillsPerMinCounts(Base):
     __tablename__ = 'tower_kills_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -559,7 +559,7 @@ class TowerKillsPerMinCounts(Base):
 class TowerKillsPerMinDeltas(Base):
     __tablename__ = 'tower_kills_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -570,7 +570,7 @@ class TowerKillsPerMinDeltas(Base):
 class VilemawAssistsPerMinCounts(Base):
     __tablename__ = 'vilemaw_assists_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -581,7 +581,7 @@ class VilemawAssistsPerMinCounts(Base):
 class VilemawKillsPerMinCounts(Base):
     __tablename__ = 'vilemaw_kills_per_min_counts'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -592,7 +592,7 @@ class VilemawKillsPerMinCounts(Base):
 class WardsPerMinDeltas(Base):
     __tablename__ = 'wards_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -603,7 +603,7 @@ class WardsPerMinDeltas(Base):
 class XpDiffPerMinDeltas(Base):
     __tablename__ = 'xp_diff_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -614,7 +614,7 @@ class XpDiffPerMinDeltas(Base):
 class XpPerMinDeltas(Base):
     __tablename__ = 'xp_per_min_deltas'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
     tenToTwenty = Column(Float)
     thirtyToEnd = Column(Float)
@@ -625,7 +625,7 @@ class XpPerMinDeltas(Base):
 class Event(Base):
     __tablename__ = 'event'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     frame_id = Column(BigInteger, ForeignKey('frame.id'))
     ascendedType = Column(String)
     assistingParticipantIds = relationship("AssistingParticipantIds",
@@ -658,7 +658,7 @@ class Event(Base):
 
 class AssistingParticipantIds(Base):
     __tablename__ = 'assisting_participant_ids'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     event_id = Column(BigInteger, ForeignKey('event.id'))
     participantId = Column(Integer)
 
@@ -666,7 +666,7 @@ class AssistingParticipantIds(Base):
 class ParticipantFrame(Base):
     __tablename__ = 'participant_frame'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     frame_id = Column(BigInteger, ForeignKey('frame.id'))
     currentGold = Column(Integer)
     dominionScore = Column(Integer)
@@ -686,7 +686,7 @@ class ParticipantFrame(Base):
 class PositionEvent(Base):
     __tablename__ = 'position_event'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     event_id = Column(BigInteger, ForeignKey('event.id'))
     x = Column(Integer)
     y = Column(Integer)
@@ -695,7 +695,7 @@ class PositionEvent(Base):
 class PositionParticipantFrame(Base):
     __tablename__ = 'position_participant_frame'
 
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantFrame_id = Column(BigInteger, ForeignKey('participant_frame.id'))
     x = Column(Integer)
     y = Column(Integer)

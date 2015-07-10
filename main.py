@@ -8,6 +8,8 @@ import time
 import json
 from stats import *
 from riotApi import *
+from filler import Filler
+from database import *
 
 
 myKey = '70f53e5d-eea1-46f0-9e8a-19889489902f'
@@ -151,22 +153,32 @@ for g in range(len(dataM['entries'])):
         dataG = getLink(urlChallengerTeamMatch, gameName, '/Challenger Stats/' + teamName + '/' + gameId + '/') # Game of a team
 
         statGetter = GetStats(dataG)
-        print(statGetter.returnMatchDetail())
-        print(statGetter.returnEventList())
-        print(statGetter.returnParticipantList())
-        print(statGetter.returnParticipantIdentityList())
-        print(statGetter.returnTeamList())
-        print(statGetter.returnMasteryList())
-        print(statGetter.returnParticipantStatsList())
-        print(statGetter.returnParticipantTimelineList())
-        print(statGetter.returnRuneList())
+        # matchObj = statGetter.returnMatchDetail()
+        # pIdList = statGetter.returnParticipantIdentityList()
+        # fillIt = Filler()
+        # fillIt.session.add(MatchDetail(**matchObj))
+        # sqlMatch = fillIt.session.query(MatchDetail).filter(MatchDetail.matchId == matchObj['matchId']).first()
+        # arr = []
+        # for x in pIdList:
+        #     arr.append(ParticipantIdentity(**x))
+        # sqlMatch.participantIdentities = arr
+        # fillIt.session.commit()
+        # fillIt.session.close()
+
+        # print(statGetter.returnEventList())
+        # print(statGetter.returnParticipantList())
+        # print(statGetter.returnTeamList())
+        # print(statGetter.returnMasteryList())
+        # print(statGetter.returnParticipantStatsList())
+        # print(statGetter.returnParticipantTimelineList())
+        # print(statGetter.returnRuneList())
         print(statGetter.returnPlayerList())
-        print(statGetter.returnBannedChampionList())
-        print(statGetter.returnFrameList())
-        print(statGetter.returnParticipantTimelineDataList())
-        print(statGetter.returnParticipantFrameList())
-        print(statGetter.returnPositionList())
-        print(statGetter.returnFrameList())
+        # print(statGetter.returnBannedChampionList())
+        # print(statGetter.returnFrameList())
+        # print(statGetter.returnParticipantTimelineDataList())
+        # print(statGetter.returnParticipantFrameList())
+        # print(statGetter.returnPositionList())
+        # print(statGetter.returnFrameList())
 
         if j == 0:
             break
