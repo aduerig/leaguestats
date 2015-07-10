@@ -18,23 +18,17 @@ class GetStats:
             if key == 'participants':
                 nestarrp = []
                 for p in self.jsonobj['participants']:
-                    nestdict = {}
-                    nestdict[key] = self.returnParticipant(p)
-                    nestarrp.append(nestdict)
+                    nestarrp.append(self.returnParticipant(p))
                 newdict['participants'] = nestarrp
             if key == 'participantIdentities':
                 nestarrp = []
                 for p in self.jsonobj['participantIdentities']:
-                    nestdict = {}
-                    nestdict[key] = self.returnParticipantIdentity(p)
-                    nestarrp.append(nestdict)
+                    nestarrp.append(self.returnParticipantIdentity(p))
                 newdict['participantIdentities'] = nestarrp
             if key == 'teams':
                 nestarrp = []
                 for p in self.jsonobj['teams']:
-                    nestdict = {}
-                    nestdict[key] = self.returnTeam(p)
-                    nestarrp.append(nestdict)
+                    nestarrp.append(self.returnTeam(p))
                 newdict['teams'] = nestarrp
             if key == 'timeline':
                 newdict['timeline'] = self.returnTimeline(self.jsonobj)
@@ -54,16 +48,12 @@ class GetStats:
             if key == 'masteries':
                 nestarrp = []
                 for p in jsonobj['masteries']:
-                    nestdict = {}
-                    nestdict[key] = self.returnMastery(p)
-                    nestarrp.append(nestdict)
+                    nestarrp.append(self.returnMastery(p))
                 newdict['masteries'] = nestarrp
             if key == 'runes':
                 nestarrp = []
                 for p in jsonobj['runes']:
-                    nestdict = {}
-                    nestdict[key] = self.returnRune(p)
-                    nestarrp.append(nestdict)
+                    nestarrp.append(self.returnRune(p))
                 newdict['runes'] = nestarrp
             if key == 'stats':
                 nestdict = {}
@@ -155,9 +145,7 @@ class GetStats:
             if key == 'bans':
                 nestarrp = []
                 for p in jsonobj['bans']:
-                    nestdict = {}
-                    nestdict[key] = self.returnBannedChampion(p)
-                    nestarrp.append(nestdict)
+                    nestarrp.append(self.returnBannedChampion(p))
                 newdict['bans'] = nestarrp
         return newdict
 
@@ -213,9 +201,7 @@ class GetStats:
             if key == 'participantFrames':
                 nestarrp = []
                 for p in jsonobj['participantFrames']:
-                    nestdict = {}
-                    nestdict[key] = self.returnParticipantFrame(jsonobj['participantFrames'])
-                    nestarrp.append(nestdict)
+                    nestarrp.append(self.returnParticipantFrame(jsonobj['participantFrames']))
                 newdict['participantFrames'] = nestarrp
         return newdict
 
