@@ -1,5 +1,3 @@
-import httplib2
-import urllib
 import json
 
 
