@@ -40,14 +40,12 @@ class GetStats:
                 newdict['timeline'] = self.returnTimeline(self.jsonobj)
         return newdict
 
-
     def returnParticipantFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             if((key != 'masteries') & (key != 'runes') & (key != 'stats') & (key != 'timeline') ):
                 newdict[key] = jsonobj[key]
         return newdict
-
 
     def returnParticipant(self, jsonobj):
         newdict = {}
@@ -75,14 +73,12 @@ class GetStats:
                 newdict['timeline'] = self.returnParticipantTimeline(jsonobj)
         return newdict
 
-
     def returnParticipantIdentityFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             if((key != 'player')):
                 newdict[key] = jsonobj[key]
         return newdict
-
 
     def returnParticipantIdentity(self, jsonobj):
         newdict = {}
@@ -92,19 +88,16 @@ class GetStats:
                 newdict[key] = self.returnPlayer(jsonobj['player'])
         return newdict
 
-
     def returnPlayerFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             newdict[key] = jsonobj[key]
         return newdict
 
-
     def returnPlayer(self, jsonobj):  # has no nests
         newdict = {}
         newdict['flat'] = self.returnPlayerFlat(jsonobj)
         return newdict
-
 
     def returnMasteryFlat(self, jsonobj):
         newdict = {}
@@ -112,12 +105,10 @@ class GetStats:
             newdict[key] = jsonobj[key]
         return newdict
 
-
     def returnMastery(self, jsonobj):  # has no nests
         newdict = {}
         newdict['flat'] = self.returnMasteryFlat(jsonobj)
         return newdict
-
 
     def returnRuneFlat(self, jsonobj):
         newdict = {}
@@ -125,12 +116,10 @@ class GetStats:
             newdict[key] = jsonobj[key]
         return newdict
 
-
     def returnRune(self, jsonobj):  # has no nests
         newdict = {}
         newdict['flat'] = self.returnRuneFlat(jsonobj)
         return newdict
-
 
     def returnParticipantTimelineFlat(self, jsonobj):
         newdict = {}
@@ -138,7 +127,6 @@ class GetStats:
             if((key == 'lane') | (key == 'role')):
                 newdict[key] = jsonobj['timeline'][key]
         return newdict
-
 
     def returnParticipantTimeline(self, jsonobj):
         newdict = {}
@@ -152,14 +140,12 @@ class GetStats:
         newdict['ParticipantTimelineData'] = nestarrp
         return newdict
 
-
     def returnTeamFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             if((key != 'bans')):
                 newdict[key] = jsonobj[key]
         return newdict
-
 
     def returnTeam(self, jsonobj):
         newdict = {}
@@ -175,19 +161,16 @@ class GetStats:
                 newdict['bans'] = nestarrp
         return newdict
 
-
     def returnBannedChampionFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             newdict[key] = jsonobj[key]
         return newdict
 
-
     def returnBannedChampion(self, jsonobj):  # has no nests
         newdict = {}
         newdict['flat'] = self.returnBannedChampionFlat(jsonobj)
         return newdict
-
 
     def returnTimelineFlat(self, jsonobj):
         newdict = {}
@@ -196,21 +179,18 @@ class GetStats:
                 newdict[key] = jsonobj[key]
         return newdict
 
-
     def returnTimeline(self, jsonobj):
         newdict = {}
         newdict['flat'] = self.returnTimelineFlat(jsonobj['timeline'])
         nestdict = {}
+        nestarrp = []
         for key in jsonobj['timeline']:
             if key == 'frames':
-                nestarrp = []
                 for p in jsonobj['timeline'][key]:
-                    nestdict = {}
                     nestdict[key] = self.returnFrame(p)
                     nestarrp.append(nestdict)
         newdict['timeline'] = nestarrp
         return newdict
-
 
     def returnFrameFlat(self, jsonobj):
         newdict = {}
@@ -218,7 +198,6 @@ class GetStats:
             if((key != 'participantFrames') & (key != 'events')):
                 newdict[key] = jsonobj[key]
         return newdict
-
 
     def returnFrame(self, jsonobj):
         newdict = {}
@@ -240,14 +219,12 @@ class GetStats:
                 newdict['participantFrames'] = nestarrp
         return newdict
 
-
     def returnEventFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             if((key != 'position') & (key != 'assistingParticipantIds')):
                 newdict[key] = jsonobj[key]
         return newdict
-
 
     def returnEvent(self, jsonobj):
         newdict = {}
@@ -259,19 +236,16 @@ class GetStats:
                 newdict['assistingParticipantIds'] = self.returnAssistingParticipantId(jsonobj['assistingParticipantIds'])
         return newdict
 
-
     def returnPositionFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
             newdict[key] = jsonobj[key]
         return newdict
 
-
     def returnPosition(self, jsonobj):  # has no nests
         newdict = {}
         newdict['flat'] = self.returnFrameFlat(jsonobj)
         return newdict
-
 
     def returnAssistingParticipantIdFlat(self, jsonobj):
         pass
@@ -281,12 +255,10 @@ class GetStats:
         #     newdict[key] = jsonobj[key]
         # return newdict
 
-
     def returnAssistingParticipantId(self, jsonobj):  # has no nests
         # newdict = {}
         # newdict['flat'] = self.returnAssistingParticipantIdFlat(jsonobj)
         return jsonobj
-
 
     def returnParticipantFrameFlat(self, jsonobj):
         newdict = {}
@@ -294,7 +266,6 @@ class GetStats:
             if((key != 'position')):
                 newdict[key] = jsonobj[key]
         return newdict
-
 
     def returnParticipantFrame(self, jsonobj): # there may be something wrong in this function
         newdict = {}
