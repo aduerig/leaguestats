@@ -2,23 +2,47 @@ class GetStats:
     def __init__(self, jsonobj):
         self.jsonobj = jsonobj
 
-    def returnMatchDetail(self):
+    # Returns only with the data that isn't nested
+    def returnMatchDetailFlat(self):
         newdict = {}
         for key in self.jsonobj:
             if((key != 'participantIdentities') & (key != 'participants')  & (key != 'teams') & (key != 'timeline')):
                 newdict[key] = self.jsonobj[key]
         return newdict
 
+    # Returns with the nested objects in the dictionary
+    def returnMatchDetail(self):
+        newdict = {}
+        newdict['flat'] = self.returnMatchDetailFlat()
+        for key in self.jsonobj:
+            if key == 'participantIdentities':
+                newdict[key] = self.returnParticipantIdentityList()
+            if key == 'participants':
+                newdict[key] = self.returnParticipants()
+            if key == 'teams':
+                newdict[key] = self.returnparticipantIdentityList()
+            if key == 'timeline':
+                newdict[key] = self.returnparticipantIdentityList()
+        return newdict
 
 
-
-
-    def returnParticipant(self, jsonobj):
+    def returnParticipantFlat(self, jsonobj):
         newdict = {}
         for key in jsonobj:
-            if((key != 'masteries') & (key != 'runes')  & (key != 'stats') & (key != 'timeline')):
+            if((key != 'participantFrames') & (key != 'events')):
                 newdict[key] = jsonobj[key]
         return newdict
+
+    def returnParticipants(self):
+        newdict = {}
+        for x in self.jsonobj['participants']:
+            newdict['flat'] = self.returnParticipantFlat(x)
+        arr = []
+        for x in self.jsonobj['participants']:
+            arr.append(self.returnParticipant(x))
+        return arr
+
+
 
     def returnParticipantIdentity(self, jsonobj):
         newdict = {}
@@ -119,12 +143,6 @@ class GetStats:
             if 'events' in x:
                 for j in x['events']:
                     arr.append(self.returnEvent(j))
-        return arr
-
-    def returnParticipantList(self):
-        arr = []
-        for x in self.jsonobj['participants']:
-            arr.append(self.returnParticipant(x))
         return arr
 
     def returnParticipantIdentityList(self):

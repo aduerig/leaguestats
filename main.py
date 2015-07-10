@@ -23,25 +23,25 @@ def stopwatch(seconds):
     # os.makedirs('/Challenger Stats/')
 
 
-def getlink(url, name, path):
-    print(url)
-    print(name)
-    print(path)
-    if path != '':
-        if not os.path.exists(path):
-            os.makedirs(path)
-    if not os.path.isfile(path + name + '.json'):
-        print('Getting ' + name + '.json ' + 'from riot')
-        stopwatch(10)
-        data = json.loads(requests.get(url + myKey).text)
-        with open(path + name + '.json', 'w') as f:
-            json.dump(data, f)
-        print('Saved!')
-    else:
-        print('Opening ' + name + '.json')
-        with open(path + name + '.json') as f:
-            data = json.load(f)
-    return data
+# def getlink(url, name, path):
+#     print(url)
+#     print(name)
+#     print(path)
+#     if path != '':
+#         if not os.path.exists(path):
+#             os.makedirs(path)
+#     if not os.path.isfile(path + name + '.json'):
+#         print('Getting ' + name + '.json ' + 'from riot')
+#         stopwatch(10)
+#         data = json.loads(requests.get(url + myKey).text)
+#         with open(path + name + '.json', 'w') as f:
+#             json.dump(data, f)
+#         print('Saved!')
+#     else:
+#         print('Opening ' + name + '.json')
+#         with open(path + name + '.json') as f:
+#             data = json.load(f)
+#     return data
 
 # dataM = getlink('ayy', 'Challenger Teams', '/Challenger Stats/')
 # teamName = dataM['entries'][0]['playerOrTeamName']
@@ -100,71 +100,83 @@ def getlink(url, name, path):
 #                x["fields"]["name"],
 #                x["fields"]["content_type"]])
 
+# # Grabs challenger 5v5 teams
+# urlChallenger = 'https://na.api.pvp.net/api/lol/na/v2.5/league/challenger' \
+#                 '?type=RANKED_TEAM_5x5&api_key='
+# dataM = getlink(urlChallenger, 'Challenger Teams', '/Challenger Stats/')
+# with open('/Challenger Stats/' + 'Challenger Teams' + '.txt', 'w') as outfile:
+#     json.dump(dataM, outfile, indent=4, separators=(',', ': '))
+#
+# # Outer loop running through all challenger teams (dataM)
+# for g in range(len(dataM['entries'])):
+#     teamId = dataM['entries'][g]['playerOrTeamId']
+#     teamName = str(dataM['entries'][g]['playerOrTeamName']).replace('\ufb01', '')
+#     urlChallengerTeam = 'https://na.api.pvp.net/api/lol/na/v2.4/team/' + teamId \
+#                         + '?api_key='
+#     dataT = getlink(urlChallengerTeam, teamName + ' Match History',
+#                     '/Challenger Stats/' + teamName + '/')  # Match history of team
+#     with open('/Challenger Stats/' + teamName + '/' + teamName
+#                       + ' Match History' + '.txt', 'w') as outfile:
+#         json.dump(dataT, outfile, indent=4, separators=(',', ': '))
+#
+#     # Grabs all games form a team (dataT)
+#     for j in range(len(dataT[teamId]['matchHistory'])):
+#         gameId = str(dataT[teamId]['matchHistory'][j]['gameId'])
+#         gameName = str(teamName + ' Match ' + gameId).replace('\ufb01', '')
+#         urlChallengerTeamMatch = 'https://na.api.pvp.net/api/lol/na/v2.2/match/'\
+#                                  + gameId + '?includeTimeline=true' + '&api_key='
+#         dataG = getlink(urlChallengerTeamMatch
+#                         , gameName, '/Challenger Stats/' + teamName + '/' + gameId
+#                         + '/')  # Game of a team
+#
+#         statGetter = GetStats(dataG)
+#         # matchObj = statGetter.returnMatchDetail()
+#         # pIdList = statGetter.returnParticipantIdentityList()
+#         # fillIt = Filler()
+#         # fillIt.session.add(MatchDetail(**matchObj))
+#         # sqlMatch = fillIt.session.query(MatchDetail).filter(MatchDetail.matchId == matchObj['matchId']).first()
+#         # arr = []
+#         # for x in pIdList:
+#         #     arr.append(ParticipantIdentity(**x))
+#         # sqlMatch.participantIdentities = arr
+#         # fillIt.session.commit()
+#         # fillIt.session.close()
+#
+#         # print(statGetter.returnEventList())
+#         # print(statGetter.returnParticipantList())
+#         # print(statGetter.returnTeamList())
+#         # print(statGetter.returnMasteryList())
+#         # print(statGetter.returnParticipantStatsList())
+#         # print(statGetter.returnParticipantTimelineList())
+#         # print(statGetter.returnRuneList())
+#         print(statGetter.returnPlayerList())
+#         # print(statGetter.returnBannedChampionList())
+#         # print(statGetter.returnFrameList())
+#         # print(statGetter.returnParticipantTimelineDataList())
+#         # print(statGetter.returnParticipantFrameList())
+#         # print(statGetter.returnPositionList())
+#         # print(statGetter.returnFrameList())
+#
+#         if j == 0:
+#             break
+#
+#         with open('/Challenger Stats/' + teamName + '/' +
+#                           gameId + '/' + gameName + '.txt', 'w') as outfile:
+#             json.dump(dataG, outfile, indent=4, separators=(',', ': '))
+#     if g == 0:
+#         break
+
+api = RiotApi('70f53e5d-eea1-46f0-9e8a-19889489902f')
+
 # Grabs challenger 5v5 teams
-urlChallenger = 'https://na.api.pvp.net/api/lol/na/v2.5/league/challenger' \
-                '?type=RANKED_TEAM_5x5&api_key='
-dataM = getlink(urlChallenger, 'Challenger Teams', '/Challenger Stats/')
-with open('/Challenger Stats/' + 'Challenger Teams' + '.txt', 'w') as outfile:
-    json.dump(dataM, outfile, indent=4, separators=(',', ': '))
+dataC = api.getchallenger()
 
 # Outer loop running through all challenger teams (dataM)
-for g in range(len(dataM['entries'])):
-    teamId = dataM['entries'][g]['playerOrTeamId']
-    teamName = str(dataM['entries'][g]['playerOrTeamName']).replace('\ufb01', '')
-    urlChallengerTeam = 'https://na.api.pvp.net/api/lol/na/v2.4/team/' + teamId \
-                        + '?api_key='
-    dataT = getlink(urlChallengerTeam, teamName + ' Match History',
-                    '/Challenger Stats/' + teamName + '/')  # Match history of team
-    with open('/Challenger Stats/' + teamName + '/' + teamName
-                      + ' Match History' + '.txt', 'w') as outfile:
-        json.dump(dataT, outfile, indent=4, separators=(',', ': '))
-
+for g in dataC['entries']:
+    dataT = api.getteam(g['playerOrTeamName'])
     # Grabs all games form a team (dataT)
-    for j in range(len(dataT[teamId]['matchHistory'])):
-        gameId = str(dataT[teamId]['matchHistory'][j]['gameId'])
-        gameName = str(teamName + ' Match ' + gameId).replace('\ufb01', '')
-        urlChallengerTeamMatch = 'https://na.api.pvp.net/api/lol/na/v2.2/match/'\
-                                 + gameId + '?includeTimeline=true' + '&api_key='
-        dataG = getlink(urlChallengerTeamMatch
-                        , gameName, '/Challenger Stats/' + teamName + '/' + gameId
-                        + '/')  # Game of a team
-
-        statGetter = GetStats(dataG)
-        # matchObj = statGetter.returnMatchDetail()
-        # pIdList = statGetter.returnParticipantIdentityList()
-        # fillIt = Filler()
-        # fillIt.session.add(MatchDetail(**matchObj))
-        # sqlMatch = fillIt.session.query(MatchDetail).filter(MatchDetail.matchId == matchObj['matchId']).first()
-        # arr = []
-        # for x in pIdList:
-        #     arr.append(ParticipantIdentity(**x))
-        # sqlMatch.participantIdentities = arr
-        # fillIt.session.commit()
-        # fillIt.session.close()
-
-        # print(statGetter.returnEventList())
-        # print(statGetter.returnParticipantList())
-        # print(statGetter.returnTeamList())
-        # print(statGetter.returnMasteryList())
-        # print(statGetter.returnParticipantStatsList())
-        # print(statGetter.returnParticipantTimelineList())
-        # print(statGetter.returnRuneList())
-        print(statGetter.returnPlayerList())
-        # print(statGetter.returnBannedChampionList())
-        # print(statGetter.returnFrameList())
-        # print(statGetter.returnParticipantTimelineDataList())
-        # print(statGetter.returnParticipantFrameList())
-        # print(statGetter.returnPositionList())
-        # print(statGetter.returnFrameList())
-
-        if j == 0:
-            break
-
-        with open('/Challenger Stats/' + teamName + '/' +
-                          gameId + '/' + gameName + '.txt', 'w') as outfile:
-            json.dump(dataG, outfile, indent=4, separators=(',', ': '))
-    if g == 0:
-        break
+    for j in dataT['matchHistory']:
+        dataM = api.getmatch(g['playerOrTeamName'], str(j['gameId']))
 
 # print(dataM.keys())
 # print(len(dataM['entries']))
