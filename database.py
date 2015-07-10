@@ -15,17 +15,25 @@ class MatchDetail(Base):
     matchMode = Column(String)
     matchType = Column(String)
     matchVersion = Column(String)
-    participantIdentities = relationship("ParticipantIdentity", single_parent=True,
-                                         cascade="save-update, merge, delete, delete-orphan", backref="match")
-    participants = relationship("Participant", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+    participantIdentities = relationship("ParticipantIdentity",
+                                         single_parent=True,
+                                         cascade="save-update, merge, delete, delete-orphan",
+                                         backref="match")
+    participants = relationship("Participant",
+                                single_parent=True,
+                                cascade="save-update, merge, delete, delete-orphan",
                                 backref="match")
     platformId = Column(String)
     queueType = Column(String)
     region = Column(String)
     season = Column(String)
-    teams = relationship("Team", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+    teams = relationship("Team",
+                         single_parent=True,
+                         cascade="save-update, merge, delete, delete-orphan",
                          backref="match")
-    timeline = relationship("Timeline", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+    timeline = relationship("Timeline",
+                            single_parent=True,
+                            cascade="save-update, merge, delete, delete-orphan",
                             backref="match")
 
 
@@ -37,18 +45,26 @@ class Participant(Base):
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     championId = Column(Integer)
     highestAchievedSeasonTier = Column(String)
-    masteries = relationship("Mastery", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+    masteries = relationship("Mastery",
+                             single_parent=True,
+                             cascade="save-update, merge, delete, delete-orphan",
                              backref="participant")
     participantId = Column(Integer)
-    runes = relationship("Rune", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+    runes = relationship("Rune",
+                         single_parent=True,
+                         cascade="save-update, merge, delete, delete-orphan",
                          backref="participant")
     spell1Id = Column(Integer)
     spell2Id = Column(Integer)
-    stats = relationship("ParticipantStats", single_parent=True, cascade="save-update, merge, delete, delete-orphan",
+    stats = relationship("ParticipantStats",
+                         single_parent=True,
+                         cascade="save-update, merge, delete, delete-orphan",
                          backref="participant")
     teamId = Column(Integer)
-    timeline = relationship("ParticipantTimeline", single_parent=True,
-                            cascade="save-update, merge, delete, delete-orphan", backref="participant")
+    timeline = relationship("ParticipantTimeline",
+                            single_parent=True,
+                            cascade="save-update, merge, delete, delete-orphan",
+                            backref="participant")
 
 
 # Add relations
@@ -58,8 +74,10 @@ class ParticipantIdentity(Base):
     id = Column(BigInteger, primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     participantId = Column(Integer)
-    player = relationship("Player", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantIdentity")
+    player = relationship("Player",
+                          single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan",
+                          backref="participantIdentity")
 
 
 class Team(Base):
@@ -67,8 +85,10 @@ class Team(Base):
 
     id = Column(BigInteger, primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
-    bans = relationship("BannedChampion", single_parent=True,
-                        cascade="save-update, merge, delete, delete-orphan", backref="team")
+    bans = relationship("BannedChampion",
+                        single_parent=True,
+                        cascade="save-update, merge, delete, delete-orphan",
+                        backref="team")
     baronKills = Column(Integer)
     dominionVictoryScore = Column(BigInteger)
     dragonKills = Column(Integer)
@@ -90,8 +110,10 @@ class Timeline(Base):
     id = Column(BigInteger, primary_key=True)
     matchId = Column(BigInteger, ForeignKey('match_detail.matchId'))
     frameInterval = Column(BigInteger)
-    frames = relationship("Frame", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="timeline")
+    frames = relationship("Frame",
+                          single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan",
+                          backref="timeline")
 
 
 class Mastery(Base):
@@ -177,58 +199,107 @@ class ParticipantTimeline(Base):
 
     id = Column(BigInteger, primary_key=True)
     participant_id = Column(BigInteger, ForeignKey('participant.id'))
-    ancientGolemAssistsPerMinCounts = relationship("AncientGolemAssistsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    ancientGolemKillsPerMinCounts = relationship("AncientGolemKillsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    assistedLaneDeathsPerMinDeltas = relationship("AssistedLaneDeathsPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    assistedLaneKillsPerMinDeltas = relationship("AssistedLaneKillsPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    baronAssistsPerMinCounts = relationship("BaronAssistsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    baronKillsPerMinCounts = relationship("BaronKillsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    creepsPerMinDeltas = relationship("CreepsPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    csDiffPerMinDeltas = relationship("CsDiffPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    damageTakenDiffPerMinDeltas = relationship("DamageTakenDiffPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    damageTakenPerMinDeltas = relationship("DamageTakenPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    dragonAssistsPerMinCounts = relationship("DragonAssistsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    dragonKillsPerMinCounts = relationship("DragonKillsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    elderLizardAssistsPerMinCounts = relationship("ElderLizardAssistsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    elderLizardKillsPerMinCounts = relationship("ElderLizardKillsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    goldPerMinDeltas = relationship("GoldPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    inhibitorAssistsPerMinCounts = relationship("InhibitorAssistsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    inhibitorKillsPerMinCounts = relationship("InhibitorKillsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    ancientGolemAssistsPerMinCounts = relationship("AncientGolemAssistsPerMinCounts",
+                                                   single_parent=True,
+                                                   cascade="save-update, merge, delete, delete-orphan",
+                                                   backref="participantTimeline")
+    ancientGolemKillsPerMinCounts = relationship("AncientGolemKillsPerMinCounts",
+                                                 single_parent=True,
+                                                 cascade="save-update, merge, delete, delete-orphan",
+                                                 backref="participantTimeline")
+    assistedLaneDeathsPerMinDeltas = relationship("AssistedLaneDeathsPerMinDeltas",
+                                                  single_parent=True,
+                                                  cascade="save-update, merge, delete, delete-orphan",
+                                                  backref="participantTimeline")
+    assistedLaneKillsPerMinDeltas = relationship("AssistedLaneKillsPerMinDeltas",
+                                                 single_parent=True,
+                                                 cascade="save-update, merge, delete, delete-orphan",
+                                                 backref="participantTimeline")
+    baronAssistsPerMinCounts = relationship("BaronAssistsPerMinCounts",
+                                            single_parent=True,
+                                            cascade="save-update, merge, delete, delete-orphan",
+                                            backref="participantTimeline")
+    baronKillsPerMinCounts = relationship("BaronKillsPerMinCounts",
+                                          single_parent=True,
+                                          cascade="save-update, merge, delete, delete-orphan",
+                                          backref="participantTimeline")
+    creepsPerMinDeltas = relationship("CreepsPerMinDeltas",
+                                      single_parent=True,
+                                      cascade="save-update, merge, delete, delete-orphan",
+                                      backref="participantTimeline")
+    csDiffPerMinDeltas = relationship("CsDiffPerMinDeltas",
+                                      single_parent=True,
+                                      cascade="save-update, merge, delete, delete-orphan",
+                                      backref="participantTimeline")
+    damageTakenDiffPerMinDeltas = relationship("DamageTakenDiffPerMinDeltas",
+                                               single_parent=True,
+                                               cascade="save-update, merge, delete, delete-orphan",
+                                               backref="participantTimeline")
+    damageTakenPerMinDeltas = relationship("DamageTakenPerMinDeltas",
+                                           single_parent=True,
+                                           cascade="save-update, merge, delete, delete-orphan",
+                                           backref="participantTimeline")
+    dragonAssistsPerMinCounts = relationship("DragonAssistsPerMinCounts",
+                                             single_parent=True,
+                                             cascade="save-update, merge, delete, delete-orphan",
+                                             backref="participantTimeline")
+    dragonKillsPerMinCounts = relationship("DragonKillsPerMinCounts",
+                                           single_parent=True,
+                                           cascade="save-update, merge, delete, delete-orphan",
+                                           backref="participantTimeline")
+    elderLizardAssistsPerMinCounts = relationship("ElderLizardAssistsPerMinCounts",
+                                                  single_parent=True,
+                                                  cascade="save-update, merge, delete, delete-orphan",
+                                                  backref="participantTimeline")
+    elderLizardKillsPerMinCounts = relationship("ElderLizardKillsPerMinCounts",
+                                                single_parent=True,
+                                                cascade="save-update, merge, delete, delete-orphan",
+                                                backref="participantTimeline")
+    goldPerMinDeltas = relationship("GoldPerMinDeltas",
+                                    single_parent=True,
+                                    cascade="save-update, merge, delete, delete-orphan",
+                                    backref="participantTimeline")
+    inhibitorAssistsPerMinCounts = relationship("InhibitorAssistsPerMinCounts",
+                                                single_parent=True,
+                                                cascade="save-update, merge, delete, delete-orphan",
+                                                backref="participantTimeline")
+    inhibitorKillsPerMinCounts = relationship("InhibitorKillsPerMinCounts",
+                                              single_parent=True,
+                                              cascade="save-update, merge, delete, delete-orphan",
+                                              backref="participantTimeline")
     lane = Column(String)
     role = Column(String)
-    towerAssistsPerMinCounts = relationship("TowerAssistsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    towerKillsPerMinCounts = relationship("TowerKillsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+    towerAssistsPerMinCounts = relationship("TowerAssistsPerMinCounts",
+                                            single_parent=True,
+                                            cascade="save-update, merge, delete, delete-orphan",
+                                            backref="participantTimeline")
+    towerKillsPerMinCounts = relationship("TowerKillsPerMinCounts",
+                                          single_parent=True,
+                                          cascade="save-update, merge, delete, delete-orphan",
+                                          backref="participantTimeline")
     towerKillsPerMinDeltas = relationship("TowerKillsPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    vilemawAssistsPerMinCounts = relationship("VilemawAssistsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    vilemawKillsPerMinCounts = relationship("VilemawKillsPerMinCounts", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    wardsPerMinDeltas = relationship("WardsPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    xpDiffPerMinDeltas = relationship("XpDiffPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
-    xpPerMinDeltas = relationship("XpPerMinDeltas", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="participantTimeline")
+                                          cascade="save-update, merge, delete, delete-orphan",
+                                          backref="participantTimeline")
+    vilemawAssistsPerMinCounts = relationship("VilemawAssistsPerMinCounts",
+                                              single_parent=True,
+                                              cascade="save-update, merge, delete, delete-orphan",
+                                              backref="participantTimeline")
+    vilemawKillsPerMinCounts = relationship("VilemawKillsPerMinCounts",
+                                            single_parent=True,
+                                            cascade="save-update, merge, delete, delete-orphan",
+                                            backref="participantTimeline")
+    wardsPerMinDeltas = relationship("WardsPerMinDeltas",
+                                     single_parent=True,
+                                     cascade="save-update, merge, delete, delete-orphan",
+                                     backref="participantTimeline")
+    xpDiffPerMinDeltas = relationship("XpDiffPerMinDeltas",
+                                      single_parent=True,
+                                      cascade="save-update, merge, delete, delete-orphan",
+                                      backref="participantTimeline")
+    xpPerMinDeltas = relationship("XpPerMinDeltas",
+                                  single_parent=True,
+                                  cascade="save-update, merge, delete, delete-orphan",
+                                  backref="participantTimeline")
 
 
 class Rune(Base):
@@ -265,10 +336,14 @@ class Frame(Base):
 
     id = Column(BigInteger, primary_key=True)
     timeline_id = Column(BigInteger, ForeignKey('timeline.id'))
-    events = relationship("Event", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="frame")
-    participantFrames = relationship("ParticipantFrame", single_parent=True,
-                          cascade="save-update, merge, delete, delete-orphan", backref="frame")
+    events = relationship("Event",
+                          single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan",
+                          backref="frame")
+    participantFrames = relationship("ParticipantFrame",
+                                     single_parent=True,
+                                     cascade="save-update, merge, delete, delete-orphan",
+                                     backref="frame")
     timestamp = Column(BigInteger)
 
 
@@ -553,8 +628,10 @@ class Event(Base):
     id = Column(BigInteger, primary_key=True)
     frame_id = Column(BigInteger, ForeignKey('frame.id'))
     ascendedType = Column(String)
-    assistingParticipantIds = relationship("AssistingParticipantIds", single_parent=True,
-                                           cascade="save-update, merge, delete, delete-orphan", backref="event")
+    assistingParticipantIds = relationship("AssistingParticipantIds",
+                                           single_parent=True,
+                                           cascade="save-update, merge, delete, delete-orphan",
+                                           backref="event")
     buildingType = Column(String)
     creatorId = Column(Integer)
     eventType = Column(String)
@@ -567,8 +644,10 @@ class Event(Base):
     monsterType = Column(String)
     participantId = Column(Integer)
     pointCaptured = Column(String)
-    position = relationship("PositionEvent", single_parent=True,
-                            cascade="save-update, merge, delete, delete-orphan", backref="event")
+    position = relationship("PositionEvent",
+                            single_parent=True,
+                            cascade="save-update, merge, delete, delete-orphan",
+                            backref="event")
     skillSlot = Column(Integer)
     teamId = Column(Integer)
     timestamp = Column(BigInteger)
@@ -595,8 +674,10 @@ class ParticipantFrame(Base):
     level = Column(Integer)
     minionsKilled = Column(Integer)
     participantId = Column(Integer)
-    position = relationship("PositionParticipantFrame", single_parent=True,
-                            cascade="save-update, merge, delete, delete-orphan", backref="participantFrame")
+    position = relationship("PositionParticipantFrame",
+                            single_parent=True,
+                            cascade="save-update, merge, delete, delete-orphan",
+                            backref="participantFrame")
     teamScore = Column(Integer)
     totalGold = Column(Integer)
     xp = Column(Integer)
