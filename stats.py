@@ -134,7 +134,7 @@ class GetStats:
         nestarrp = []
         for p in jsonobj['timeline']:
             nestdict = {}
-            if((p != 'lane') | (p != 'role')):
+            if((p != 'lane') & (p != 'role')):
                 nestdict[p] = jsonobj['timeline'][p]
                 nestarrp.append(nestdict)
         newdict['ParticipantTimelineData'] = nestarrp
