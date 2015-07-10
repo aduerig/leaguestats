@@ -128,33 +128,27 @@ with open('/Challenger Stats/' + teamName + '/' + gameId + '/' + gameName + '.tx
 #                x["fields"]["name"],
 #                x["fields"]["content_type"]])
 
-
-
-
-#Grabs challenger 5v5 teams
+# Grabs challenger 5v5 teams
 urlChallenger = 'https://na.api.pvp.net/api/lol/na/v2.5/league/challenger?type=RANKED_TEAM_5x5&api_key='
 dataM = getLink(urlChallenger, 'Challenger Teams', '/Challenger Stats/')
 with open('/Challenger Stats/' + 'Challenger Teams' + '.txt', 'w') as outfile:
         json.dump(dataM,  outfile, indent=4, separators=(',', ': '))
 
-#Outer loop running through all challenger teams (dataM)
+# Outer loop running through all challenger teams (dataM)
 for g in range(len(dataM['entries'])):
     teamId = dataM['entries'][g]['playerOrTeamId']
     teamName = str(dataM['entries'][g]['playerOrTeamName']).replace('\ufb01', '')
     urlChallengerTeam = 'https://na.api.pvp.net/api/lol/na/v2.4/team/' + teamId + '?api_key='
-    dataT = getLink(urlChallengerTeam, teamName + ' Match History', '/Challenger Stats/' + teamName + '/') #Match history of team
+    dataT = getLink(urlChallengerTeam, teamName + ' Match History', '/Challenger Stats/' + teamName + '/') # Match history of team
     with open('/Challenger Stats/' + teamName + '/' + teamName + ' Match History' + '.txt', 'w') as outfile:
             json.dump(dataT,  outfile, indent=4, separators=(',', ': '))
 
-    #Grabs all games form a team (dataT)
-
-
+    # Grabs all games form a team (dataT)
     for j in range(len(dataT[teamId]['matchHistory'])):
         gameId = str(dataT[teamId]['matchHistory'][j]['gameId'])
         gameName = str(teamName + ' Match ' + gameId).replace('\ufb01', '')
         urlChallengerTeamMatch = 'https://na.api.pvp.net/api/lol/na/v2.2/match/' + gameId + '?includeTimeline=true' + '&api_key='
-        dataG = getLink(urlChallengerTeamMatch, gameName, '/Challenger Stats/' + teamName + '/' + gameId + '/') #Game of a team
-
+        dataG = getLink(urlChallengerTeamMatch, gameName, '/Challenger Stats/' + teamName + '/' + gameId + '/') # Game of a team
 
         statGetter = GetStats(dataG)
         print(statGetter.returnMatchDetail())
@@ -174,15 +168,12 @@ for g in range(len(dataM['entries'])):
         print(statGetter.returnPositionList())
         print(statGetter.returnFrameList())
 
-
-
-        if(j == 0):
+        if j == 0:
             break
 
         with open('/Challenger Stats/' + teamName + '/' + gameId + '/' + gameName + '.txt', 'w') as outfile:
                 json.dump(dataG,  outfile, indent=4, separators=(',', ': '))
-
-    if(g == 0):
+    if g == 0:
         break
 
 
