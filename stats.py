@@ -123,10 +123,8 @@ class GetStats:
         newdict['flat'] = self.returnParticipantTimelineFlat(jsonobj)
         nestarrp = []
         for p in jsonobj['timeline']:
-            nestdict = {}
             if((p != 'lane') & (p != 'role')):
-                nestdict[p] = jsonobj['timeline'][p]
-                nestarrp.append(nestdict)
+                nestarrp.append(jsonobj['timeline'][p])
         newdict['ParticipantTimelineData'] = nestarrp
         return newdict
 
