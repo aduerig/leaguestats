@@ -6,13 +6,13 @@ import requests
 import json
 import os.path
 import time
+from stats import *
 import csv
 #import numpy
 #import statsmodels.api as sm
 
 
 myKey = '70f53e5d-eea1-46f0-9e8a-19889489902f'
-
 
 
 #nsample = 100
@@ -69,249 +69,43 @@ gameName = teamName + ' Match ' + str(dataT[teamId]['matchHistory'][0]['gameId']
 dataG = getLink('dank', gameName, '/Challenger Stats/' + teamName + '/' + str(dataT[teamId]['matchHistory'][0]['gameId']) + '/')
 gameId = str(dataT[teamId]['matchHistory'][0]['gameId'])
 
-
-def returnMatchDetail(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key != 'participantIdentities') & (key != 'participants')  & (key != 'teams') & (key != 'timeline')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnParticipant(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key != 'masteries') & (key != 'runes')  & (key != 'stats') & (key != 'timeline')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnParticipantIdentity(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key != 'player')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnTeam(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key != 'bans')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnTimeline(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key != 'frames')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnMastery(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        newdict[key] = jsonobj[key]
-    return newdict
-
-def returnParticipantStats(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        newdict[key] = jsonobj[key]
-    return newdict
-
-def returnParticipantTimeline(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key == 'lane') | (key == 'role')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnRune(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        newdict[key] = jsonobj[key]
-    return newdict
-
-def returnPlayer(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        newdict[key] = jsonobj[key]
-    return newdict
-
-def returnBannedChampion(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        newdict[key] = jsonobj[key]
-    return newdict
-
-def returnFrame(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key != 'participantFrames') & (key != 'events')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnParticipantTimelineData(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        newdict[key] = jsonobj[key]
-    return newdict
-
-def returnEvent(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key != 'position') & (key != 'assistingParticipantIds')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnParticipantFrame(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        if((key != 'position')):
-            newdict[key] = jsonobj[key]
-    return newdict
-
-def returnPosition(jsonobj):
-    newdict = {}
-    for key in jsonobj:
-        newdict[key] = jsonobj[key]
-    return newdict
-
-def returnAssistingParticipantIds(listint):
-    newdict = {}
-    for key in listint:
-        newdict[str(key)] = key
-    return newdict
-
-print(returnMatchDetail(dataG))
-print(returnParticipant(dataG['participants'][0]))
-print(returnParticipantIdentity(dataG['participantIdentities'][0]))
-print(returnTeam(dataG['teams'][0]))
-print(returnTimeline(dataG['timeline']))
-print(returnMastery(dataG['participants'][0]['masteries'][0]))
-print(returnParticipantStats(dataG['participants'][0]['stats']))
-print(returnParticipantTimeline(dataG['participants'][0]['timeline']))
-print(returnRune(dataG['participants'][0]['runes'][0]))
-print(returnPlayer(dataG['participantIdentities'][0]['player']))
-print(returnBannedChampion(dataG['teams'][0]['bans'][0]))
-print(returnFrame(dataG['timeline']['frames'][0]))
-print(returnParticipantTimelineData(dataG['participants'][0]['timeline']['csDiffPerMinDeltas']))
-print(returnEvent(dataG['timeline']['frames'][1]['events'][0]))
-print(returnParticipantFrame(dataG['timeline']['frames'][1]['participantFrames']['1']))
-print(returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']))
+statGetter = GetStats(dataG)
 
 
-print()
+# print(statGetter.returnMatchDetail(dataG))
+# print(statGetter.returnParticipant(dataG['participants'][0]))
+# print(statGetter.returnParticipantIdentity(dataG['participantIdentities'][0]))
+# print(statGetter.returnTeam(dataG['teams'][0]))
+# print(statGetter.returnTimeline(dataG['timeline']))
+# print(statGetter.returnMastery(dataG['participants'][0]['masteries'][0]))
+# print(statGetter.returnParticipantStats(dataG['participants'][0]['stats']))
+# print(statGetter.returnParticipantTimeline(dataG['participants'][0]['timeline']))
+# print(statGetter.returnRune(dataG['participants'][0]['runes'][0]))
+# print(statGetter.returnPlayer(dataG['participantIdentities'][0]['player']))
+# print(statGetter.returnBannedChampion(dataG['teams'][0]['bans'][0]))
+# print(statGetter.returnFrame(dataG['timeline']['frames'][0]))
+# print(statGetter.returnParticipantTimelineData(dataG['participants'][0]['timeline']['csDiffPerMinDeltas']))
+# print(statGetter.returnEvent(dataG['timeline']['frames'][1]['events'][0]))
+# print(statGetter.returnParticipantFrame(dataG['timeline']['frames'][1]['participantFrames']['1']))
+# print(statGetter.returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']))
 
-#print(returnAssistingParticipantIds(dataG['timeline']['frames'][1]['participantFrames']['1']['position']))
 
-def returnEventList(jsonobj):
-    arr = []
-    for x in jsonobj['timeline']['frames']:
-        if 'events' in x:
-            for j in x['events']:
-                arr.append(returnEvent(j))
-    return arr
+print(statGetter.returnEventList())
+print(statGetter.returnParticipantList())
+print(statGetter.returnParticipantIdentityList())
+print(statGetter.returnTeamList())
+print(statGetter.returnMasteryList())
+print(statGetter.returnParticipantStatsList())
+print(statGetter.returnParticipantTimelineList())
+print(statGetter.returnRuneList())
+print(statGetter.returnPlayerList())
+print(statGetter.returnBannedChampionList())
+print(statGetter.returnFrameList())
+print(statGetter.returnParticipantTimelineDataList())
+print(statGetter.returnParticipantFrameList())
+print(statGetter.returnPositionList())
 
-def returnParticipantList(jsonobj):
-    arr = []
-    for x in jsonobj['participants']:
-        arr.append(returnParticipant(x))
-    return arr
-
-def returnParticipantIdentityList(jsonobj):
-    arr = []
-    for x in jsonobj['participantIdentities']:
-        arr.append(returnParticipantIdentity(x))
-    return arr
-
-def returnTeamList(jsonobj):
-    arr = []
-    for x in jsonobj['teams']:
-        arr.append(returnTeam(x))
-    return arr
-
-def returnMasteryList(jsonobj):
-    arr = []
-    for x in jsonobj['participants']:
-        for j in x['masteries']:
-            arr.append(returnMastery(j))
-    return arr
-
-def returnParticipantStatsList(jsonobj):
-    arr = []
-    for x in jsonobj['participants']:
-        arr.append(returnParticipantStats(x['stats']))
-    return arr
-
-def returnParticipantTimelineList(jsonobj):
-    arr = []
-    for x in jsonobj['participants']:
-        arr.append(returnParticipantTimeline(x['timeline']))
-    return arr
-
-def returnRuneList(jsonobj):
-    arr = []
-    for x in jsonobj['participants']:
-        for j in x['runes']:
-            arr.append(returnRune(j))
-    return arr
-
-def returnPlayerList(jsonobj):
-    arr = []
-    for x in jsonobj['participantIdentities']:
-        arr.append(returnPlayer(x['player']))
-    return arr
-
-def returnBannedChampionList(jsonobj):
-    arr = []
-    for x in jsonobj['teams']:
-        for j in x['bans']:
-            arr.append(returnBannedChampion(j))
-    return arr
-
-def returnFrameList(jsonobj): # there may be something wrong in this function
-    arr = []
-    for x in jsonobj['timeline']['frames']:
-        arr.append(returnFrame(x))
-    return arr
-
-def returnParticipantTimelineDataList(jsonobj): # there may be something wrong in this function
-    arr = []
-    for x in jsonobj['participants']:
-        for j in x['timeline']:
-            if((j != 'role') & (j != 'lane')):
-                arr.append(returnParticipantTimelineData(x))
-    return arr
-
-def returnParticipantFrameList(jsonobj): # there may be something wrong in this function
-    arr = []
-    for x in jsonobj['timeline']['frames']:
-        if 'participantFrames' in x:
-            for j in range(1, 10):
-                arr.append(returnParticipantFrame(x['participantFrames'][str(j)]))
-    return arr
-
-def returnPositionList(jsonobj):
-    arr = []
-    for x in jsonobj['timeline']['frames']:
-        if 'participantFrames' in x:
-            for j in range(1, 10):
-                arr.append(returnPosition(x['participantFrames'][str(j)]))
-    return arr
-
-print(returnEventList(dataG))
-print(returnParticipantList(dataG))
-print(returnParticipantIdentityList(dataG))
-print(returnTeamList(dataG))
-print(returnMasteryList(dataG))
-print(returnParticipantStatsList(dataG))
-print(returnParticipantTimelineList(dataG))
-print(returnRuneList(dataG))
-print(returnPlayerList(dataG))
-print(returnBannedChampionList(dataG))
-print(returnFrameList(dataG))
-print(returnParticipantTimelineDataList(dataG))
-print(returnParticipantFrameList(dataG))
-print(returnPositionList(dataG))
+print(statGetter.returnFrameList())
 
 print('\n')
 
