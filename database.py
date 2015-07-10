@@ -262,6 +262,10 @@ class Frame(Base):
 
     id = Column(BigInteger, primary_key=True)
     timeline_id = Column(BigInteger, ForeignKey('timeline.id'))
+    events = relationship("Event", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="frame")
+    participantFrames = relationship("ParticipantFrame", single_parent=True,
+                          cascade="save-update, merge, delete, delete-orphan", backref="frame")
     timestamp = Column(BigInteger)
 
 
@@ -544,7 +548,10 @@ class Event(Base):
     __tablename__ = 'event'
 
     id = Column(BigInteger, primary_key=True)
+    frame_id = Column(BigInteger, ForeignKey('frame.id'))
     ascendedType = Column(String)
+    assistingParticipantIds = relationship("AssistingParticipantIds", single_parent=True,
+                                           cascade="save-update, merge, delete, delete-orphan", backref="event")
     buildingType = Column(String)
     creatorId = Column(Integer)
     eventType = Column(String)
@@ -557,6 +564,8 @@ class Event(Base):
     monsterType = Column(String)
     participantId = Column(Integer)
     pointCaptured = Column(String)
+    position = relationship("PositionEvent", single_parent=True,
+                            cascade="save-update, merge, delete, delete-orphan", backref="event")
     skillSlot = Column(Integer)
     teamId = Column(Integer)
     timestamp = Column(BigInteger)
@@ -565,24 +574,44 @@ class Event(Base):
     wardType = Column(String)
 
 
+class AssistingParticipantIds(Base):
+    __tablename__ = 'assisting_participant_ids'
+    id = Column(BigInteger, primary_key=True)
+    event_id = Column(BigInteger, ForeignKey('event.id'))
+    participantId = Column(Integer)
+
+
 class ParticipantFrame(Base):
     __tablename__ = 'participant_frame'
 
     id = Column(BigInteger, primary_key=True)
+    frame_id = Column(BigInteger, ForeignKey('frame.id'))
     currentGold = Column(Integer)
     dominionScore = Column(Integer)
     jungleMinionsKilled = Column(Integer)
     level = Column(Integer)
     minionsKilled = Column(Integer)
     participantId = Column(Integer)
+    position = relationship("PositionParticipantFrame", single_parent=True,
+                            cascade="save-update, merge, delete, delete-orphan", backref="participantFrame")
     teamScore = Column(Integer)
     totalGold = Column(Integer)
     xp = Column(Integer)
 
 
-class Position(Base):
-    __tablename__ = 'position'
+class PositionEvent(Base):
+    __tablename__ = 'position_event'
 
     id = Column(BigInteger, primary_key=True)
+    event_id = Column(BigInteger, ForeignKey('event.id'))
+    x = Column(Integer)
+    y = Column(Integer)
+
+
+class PositionParticipantFrame(Base):
+    __tablename__ = 'position_participant_frame'
+
+    id = Column(BigInteger, primary_key=True)
+    participantFrame_id = Column(BigInteger, ForeignKey('participant_frame.id'))
     x = Column(Integer)
     y = Column(Integer)
