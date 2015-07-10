@@ -61,15 +61,14 @@ def getLink( url, name, path ):
 print('\n')
 
 
-dataM = getLink('ayy', 'Challenger Teams', '/Challenger Stats/')
-teamName = dataM['entries'][0]['playerOrTeamName']
-dataT = getLink('lmao', teamName + ' Match History', '/Challenger Stats/' + teamName + '/')
-teamId = dataM['entries'][0]['playerOrTeamId']
-gameName = teamName + ' Match ' + str(dataT[teamId]['matchHistory'][0]['gameId'])
-dataG = getLink('dank', gameName, '/Challenger Stats/' + teamName + '/' + str(dataT[teamId]['matchHistory'][0]['gameId']) + '/')
-gameId = str(dataT[teamId]['matchHistory'][0]['gameId'])
+# dataM = getLink('ayy', 'Challenger Teams', '/Challenger Stats/')
+# teamName = dataM['entries'][0]['playerOrTeamName']
+# dataT = getLink('lmao', teamName + ' Match History', '/Challenger Stats/' + teamName + '/')
+# teamId = dataM['entries'][0]['playerOrTeamId']
+# gameName = teamName + ' Match ' + str(dataT[teamId]['matchHistory'][0]['gameId'])
+# dataG = getLink('dank', gameName, '/Challenger Stats/' + teamName + '/' + str(dataT[teamId]['matchHistory'][0]['gameId']) + '/')
+# gameId = str(dataT[teamId]['matchHistory'][0]['gameId'])
 
-statGetter = GetStats(dataG)
 
 
 # print(statGetter.returnMatchDetail(dataG))
@@ -90,25 +89,6 @@ statGetter = GetStats(dataG)
 # print(statGetter.returnPosition(dataG['timeline']['frames'][1]['participantFrames']['1']))
 
 
-print(statGetter.returnEventList())
-print(statGetter.returnParticipantList())
-print(statGetter.returnParticipantIdentityList())
-print(statGetter.returnTeamList())
-print(statGetter.returnMasteryList())
-print(statGetter.returnParticipantStatsList())
-print(statGetter.returnParticipantTimelineList())
-print(statGetter.returnRuneList())
-print(statGetter.returnPlayerList())
-print(statGetter.returnBannedChampionList())
-print(statGetter.returnFrameList())
-print(statGetter.returnParticipantTimelineDataList())
-print(statGetter.returnParticipantFrameList())
-print(statGetter.returnPositionList())
-
-print(statGetter.returnFrameList())
-
-print('\n')
-
 
 """
 if(dataG["teams"][0]['teamId'] == 100):
@@ -127,14 +107,14 @@ print(dataG['timeline']['frames'][1])
 
 with open('/Challenger Stats/' + teamName + '/' + gameId + '/' + gameName + ' random ass stats' + '.txt', 'w') as outfile:
     json.dump(dataG['timeline']['frames'][1],  outfile, indent=4, separators=(',', ': '))
-"""
+
 
 
 print('\n')
 
 with open('/Challenger Stats/' + teamName + '/' + gameId + '/' + gameName + '.txt', 'w') as outfile:
     json.dump(dataG,  outfile, indent=4, separators=(',', ': '))
-
+"""
 
 #dataTest = getLink('blah', 'Challenger Teams', '/Challenger Stats/')
 
@@ -174,8 +154,34 @@ for g in range(len(dataM['entries'])):
         gameName = str(teamName + ' Match ' + gameId).replace('\ufb01', '')
         urlChallengerTeamMatch = 'https://na.api.pvp.net/api/lol/na/v2.2/match/' + gameId + '?includeTimeline=true' + '&api_key='
         dataG = getLink(urlChallengerTeamMatch, gameName, '/Challenger Stats/' + teamName + '/' + gameId + '/') #Game of a team
+
+
+        statGetter = GetStats(dataG)
+        print(statGetter.returnEventList())
+        print(statGetter.returnParticipantList())
+        print(statGetter.returnParticipantIdentityList())
+        print(statGetter.returnTeamList())
+        print(statGetter.returnMasteryList())
+        print(statGetter.returnParticipantStatsList())
+        print(statGetter.returnParticipantTimelineList())
+        print(statGetter.returnRuneList())
+        print(statGetter.returnPlayerList())
+        print(statGetter.returnBannedChampionList())
+        print(statGetter.returnFrameList())
+        print(statGetter.returnParticipantTimelineDataList())
+        print(statGetter.returnParticipantFrameList())
+        print(statGetter.returnPositionList())
+        print(statGetter.returnFrameList())
+
+
+        if(j == 0):
+            break
+
         with open('/Challenger Stats/' + teamName + '/' + gameId + '/' + gameName + '.txt', 'w') as outfile:
                 json.dump(dataG,  outfile, indent=4, separators=(',', ': '))
+
+    if(g == 0):
+        break
 
 
 
@@ -212,13 +218,7 @@ for g in range(len(dataM['entries'])):
 
 
 
-
-print('\n')
-
-
-
-
-
+"""
 x = 2 #Number of names
 
 dataJ = [{} for i in range(x)]
@@ -261,4 +261,4 @@ print('id' in dataJ[0][ID[0]])
 #document.getElementById("sLevel").innerHTML = summonerLevel;
 #document.getElementById("sID").innerHTML = summonerID;
 
-#letsGetMasteries(summonerID);
+"""
