@@ -12,9 +12,10 @@ with open('challenger_data.txt', 'w') as outfile:
         json.dump(dataC, outfile, indent=2, separators=(',', ': '))
 
 # Outer loop running through all challenger teams (dataM)
-def get_single_json():
+def fill_it_up():
+    filler = Filler()
+    start = time.time()
     x = 0
-    arr = []
     for g in dataC['entries']:
         y = 0
         dataT = api.getteam(g['playerOrTeamName'])
@@ -25,17 +26,13 @@ def get_single_json():
             realdata = statgetter.returnMatchDetail()
             # with open('/Challenger Stats/test.txt', 'w') as outfile:
             #     json.dump(realdata,  outfile, indent=4, separators=(',', ': '))
-            arr.append(realdata)
+            filler.add_match(realdata)
+            print(time.time() - start)
             x += 1
-        if x >= 20:
-            break
-    return arr
 
-json_objs = get_single_json()
+fill_it_up()
 # json_obj = get_single_json()
 
-filler = Filler()
-start = time.time()
-for x in json_objs:
-    filler.add_match(x)
-    print(time.time() - start)
+# for x in json_objs:
+#     filler.add_match(x)
+#     print(time.time() - start)
