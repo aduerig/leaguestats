@@ -60,6 +60,9 @@ class GetStats:
                 nestdict['flat'] = jsonobj['stats']
                 newdict['stats'] = nestdict
             if key == 'timeline':
+                # print(jsonobj['timeline'])
+                # newdict['timeline'] = self.returnParticipantTimeline(jsonobj)
+                # newdict['timeline'] = jsonobj['timeline']
                 newdict['timeline'] = self.returnParticipantTimeline(jsonobj)
         return newdict
 
@@ -120,12 +123,14 @@ class GetStats:
 
     def returnParticipantTimeline(self, jsonobj):
         newdict = {}
+        newerdict = {}
         newdict['flat'] = self.returnParticipantTimelineFlat(jsonobj)
         nestarrp = []
         for p in jsonobj['timeline']:
+            newestdict = {}
             if((p != 'lane') & (p != 'role')):
-                nestarrp.append(jsonobj['timeline'][p])
-        newdict['ParticipantTimelineData'] = nestarrp
+                newestdict['flat'] = jsonobj['timeline'][p]
+                newdict[p.capitalize()] = newestdict
         return newdict
 
     def returnTeamFlat(self, jsonobj):
