@@ -16,10 +16,11 @@ class Filler:
 
         # ##########MatchDetail
         # Fill participantIdentities
-        tmp_arr = []
-        for x in json_obj['participantIdentities']:
-            tmp_arr.append(ParticipantIdentity(**x['flat']))
-        match.participantIdentities = tmp_arr
+        # tmp_arr = []
+        # for x in json_obj['participantIdentities']:
+        #     tmp_arr.append(ParticipantIdentity(**x['flat']))
+        # match.participantIdentities = tmp_arr
+        match.participantIdentities = self.fill_participant_identities(json_obj['participantIdentities'])
 
         # Fills all participant data
         match.participants = self.fill_participants(json_obj['participants'])
@@ -34,6 +35,14 @@ class Filler:
 
         # Commit changes
         self.session.commit()
+
+    @staticmethod
+    def fill_participant_identities(part_id_json):
+        tmp_arr = []
+        for x in part_id_json:
+            x['flat']['player'] = [Player(**x['player']['flat'])]
+            tmp_arr.append(ParticipantIdentity(**x['flat']))
+        return tmp_arr
 
     def fill_teams(self, team_json):
         tmp_arr = []
