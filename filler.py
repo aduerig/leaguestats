@@ -60,15 +60,18 @@ class Filler:
             tmp_arr.append(Participant(**x['flat']))
         match.participants = tmp_arr
 
-    def get_part_timeline(self, timeline_json):
+    @staticmethod
+    def get_part_timeline(timeline_json):
         t_json = timeline_json
         # Must return participantTimeline as an array [...]
         t_keys = list(timeline_json)
         t_keys.remove('flat')
         for x in t_keys:
             t_class = eval(x)
-            t_json['flat'][x] = [t_class(t_json['flat'][x][x])]
-        return ParticipantTimeline(**t_json['flat'])
+            y = (x[0].lower()) + (x[1:])
+            print(t_class)
+            t_json['flat'][y] = [t_class(**t_json[x]['flat'])]
+        return [ParticipantTimeline(**t_json['flat'])]
 
     @staticmethod
     def get_masteries_arr(mast_json):
