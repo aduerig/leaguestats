@@ -67,6 +67,3 @@ class RiotApi:
                                     teamname + '/' + gameid + '/')  # Game of a team
                 break
         return data
-
-api = RiotApi('70f53e5d-eea1-46f0-9e8a-19889489902f')
-api.getmatch('Good Mannered Gaming', '1850845307')
