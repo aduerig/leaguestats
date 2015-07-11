@@ -47,7 +47,8 @@ class Filler:
     def fill_teams(self, team_json):
         tmp_arr = []
         for x in team_json:
-            x['flat']['bans'] = self.get_bans(x['bans'])
+            if 'bans' in x:
+                x['flat']['bans'] = self.get_bans(x['bans'])
             tmp_arr.append(Team(**x['flat']))
         return tmp_arr
 
@@ -62,10 +63,14 @@ class Filler:
     def fill_participants(self, part_json):
         tmp_arr = []
         for x in part_json:
-            x['flat']['masteries'] = self.get_masteries_arr(x['masteries'])
-            x['flat']['runes'] = self.get_runes_arr(x['runes'])
-            x['flat']['stats'] = [ParticipantStats(**x['stats']['flat'])]
-            x['flat']['timeline'] = self.get_part_timeline(x['timeline'])
+            if 'masteries' in x:
+                x['flat']['masteries'] = self.get_masteries_arr(x['masteries'])
+            if 'runes' in x:
+                x['flat']['runes'] = self.get_runes_arr(x['runes'])
+            if 'stats' in x:
+                x['flat']['stats'] = [ParticipantStats(**x['stats']['flat'])]
+            if 'timeline' in x:
+                x['flat']['timeline'] = self.get_part_timeline(x['timeline'])
 
             tmp_arr.append(Participant(**x['flat']))
         return tmp_arr
@@ -87,8 +92,8 @@ class Filler:
     def get_part_frames(part_frame_json):
         tmp_arr = []
         for x in part_frame_json:
-            x['flat']['position'] = [PositionParticipantFrame(**x['position']['flat'])]
-
+            if 'position' in x:
+                x['flat']['position'] = [PositionParticipantFrame(**x['position']['flat'])]
             tmp_arr.append(ParticipantFrame(**x['flat']))
         return tmp_arr
 
@@ -142,7 +147,3 @@ class Filler:
         for x in stats_json:
             tmp_arr.append(ParticipantStats(**x['flat']))
         return tmp_arr
-
-# filler = Filler()
-#
-# filler.helloWorld()
