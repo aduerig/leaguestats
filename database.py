@@ -353,10 +353,10 @@ class AncientGolemAssistsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class AncientGolemKillsPerMinCounts(Base):
@@ -364,10 +364,10 @@ class AncientGolemKillsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class AssistedLaneDeathsPerMinDeltas(Base):
@@ -375,10 +375,10 @@ class AssistedLaneDeathsPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class AssistedLaneKillsPerMinDeltas(Base):
@@ -386,10 +386,10 @@ class AssistedLaneKillsPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class BaronAssistsPerMinCounts(Base):
@@ -397,10 +397,10 @@ class BaronAssistsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class BaronKillsPerMinCounts(Base):
@@ -408,10 +408,10 @@ class BaronKillsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class CreepsPerMinDeltas(Base):
@@ -419,10 +419,10 @@ class CreepsPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class CsDiffPerMinDeltas(Base):
@@ -430,10 +430,10 @@ class CsDiffPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class DamageTakenDiffPerMinDeltas(Base):
@@ -441,10 +441,10 @@ class DamageTakenDiffPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class DamageTakenPerMinDeltas(Base):
@@ -452,10 +452,10 @@ class DamageTakenPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class DragonAssistsPerMinCounts(Base):
@@ -463,10 +463,10 @@ class DragonAssistsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class DragonKillsPerMinCounts(Base):
@@ -474,10 +474,10 @@ class DragonKillsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class ElderLizardAssistsPerMinCounts(Base):
@@ -485,10 +485,10 @@ class ElderLizardAssistsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class ElderLizardKillsPerMinCounts(Base):
@@ -496,10 +496,10 @@ class ElderLizardKillsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class GoldPerMinDeltas(Base):
@@ -507,10 +507,10 @@ class GoldPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class InhibitorAssistsPerMinCounts(Base):
@@ -518,10 +518,10 @@ class InhibitorAssistsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class InhibitorKillsPerMinCounts(Base):
@@ -529,10 +529,10 @@ class InhibitorKillsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class TowerAssistsPerMinCounts(Base):
@@ -540,10 +540,10 @@ class TowerAssistsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class TowerKillsPerMinCounts(Base):
@@ -551,10 +551,10 @@ class TowerKillsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class TowerKillsPerMinDeltas(Base):
@@ -562,10 +562,10 @@ class TowerKillsPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class VilemawAssistsPerMinCounts(Base):
@@ -573,10 +573,10 @@ class VilemawAssistsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class VilemawKillsPerMinCounts(Base):
@@ -584,10 +584,10 @@ class VilemawKillsPerMinCounts(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class WardsPerMinDeltas(Base):
@@ -595,10 +595,10 @@ class WardsPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class XpDiffPerMinDeltas(Base):
@@ -606,10 +606,10 @@ class XpDiffPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class XpPerMinDeltas(Base):
@@ -617,10 +617,10 @@ class XpPerMinDeltas(Base):
 
     id = Column(BigInteger().with_variant(Integer, 'sqlite'), primary_key=True)
     participantTimeline_id = Column(BigInteger, ForeignKey('participant_timeline.id'))
-    tenToTwenty = Column(Float)
-    thirtyToEnd = Column(Float)
-    twentyToThirty = Column(Float)
     zeroToTen = Column(Float)
+    tenToTwenty = Column(Float)
+    twentyToThirty = Column(Float)
+    thirtyToEnd = Column(Float)
 
 
 class Event(Base):

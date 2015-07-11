@@ -19,28 +19,16 @@ class Filler:
         tmp_arr = []
         for x in json_obj['participantIdentities']:
             tmp_arr.append(ParticipantIdentity(**x['flat']))
-            print(x['flat'])
         match.participantIdentities = tmp_arr
 
         self.fill_participants(json_obj['participants'], match)
+        match.timeline = [Timeline(**json_obj['timeline']['flat'])]
         # Fill teams
         tmp_arr = []
         for x in json_obj['teams']:
             tmp_arr.append(Team(**x['flat']))
         match.teams = tmp_arr
 
-        # Fill timeline
-        print(json_obj['timeline'].keys())
-        print(json_obj['timeline']['flat'])
-        match.timeline = [Timeline(**json_obj['timeline']['flat'])]
-        # #####################################
-        # Participant
-
-        # Fill runes
-
-        # Fill stats
-
-        # Fill timeline
         self.session.commit()
 
     def fill_participants(self, part_json, match):
@@ -50,11 +38,6 @@ class Filler:
             x['flat']['masteries'] = self.get_masteries_arr(x['masteries'])
             x['flat']['runes'] = self.get_runes_arr(x['runes'])
             x['flat']['stats'] = [ParticipantStats(**x['stats']['flat'])]
-            print(x['timeline'])
-            timeline_keys = list(x['timeline'])
-            print(timeline_keys)
-            timeline_keys.remove('flat')
-            print(timeline_keys)
             x['flat']['timeline'] = self.get_part_timeline(x['timeline'])
 
             tmp_arr.append(Participant(**x['flat']))
@@ -69,7 +52,6 @@ class Filler:
         for x in t_keys:
             t_class = eval(x)
             y = (x[0].lower()) + (x[1:])
-            print(t_class)
             t_json['flat'][y] = [t_class(**t_json[x]['flat'])]
         return [ParticipantTimeline(**t_json['flat'])]
 
