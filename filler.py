@@ -29,15 +29,29 @@ class Filler:
         match.timeline = self.fill_timeline(json_obj['timeline'])
 
         # Fill teams
-        tmp_arr = []
-        for x in json_obj['teams']:
-            tmp_arr.append(Team(**x['flat']))
-        match.teams = tmp_arr
-
+        # tmp_arr = []
+        # for x in json_obj['teams']:
+        #     tmp_arr.append(Team(**x['flat']))
+        # match.teams = tmp_arr
+        match.teams = self.fill_teams(json_obj['teams'])
         # ##########
 
         # Commit changes
         self.session.commit()
+
+    def fill_teams(self, team_json):
+        tmp_arr = []
+        for x in team_json:
+            x['flat']['bans'] = self.get_bans(x['bans'])
+            tmp_arr.append(Team(**x['flat']))
+        return tmp_arr
+
+    @staticmethod
+    def get_bans(bans_json):
+        tmp_arr = []
+        for x in bans_json:
+            tmp_arr.append(BannedChampion(**x['flat']))
+        return tmp_arr
 
     # Fill all participants
     def fill_participants(self, part_json, match):
