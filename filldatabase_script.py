@@ -1,16 +1,20 @@
 from stats import *
 from riotApi import *
 from filler import Filler
+import time
 
 
 api = RiotApi('70f53e5d-eea1-46f0-9e8a-19889489902f')
 
 # Grabs challenger 5v5 teams
 dataC = api.getchallenger()
+with open('challenger_data.txt', 'w') as outfile:
+        json.dump(dataC, outfile, indent=2, separators=(',', ': '))
 
 # Outer loop running through all challenger teams (dataM)
 def get_single_json():
     x = 0
+    arr = []
     for g in dataC['entries']:
         y = 0
         dataT = api.getteam(g['playerOrTeamName'])
@@ -21,9 +25,17 @@ def get_single_json():
             realdata = statgetter.returnMatchDetail()
             # with open('/Challenger Stats/test.txt', 'w') as outfile:
             #     json.dump(realdata,  outfile, indent=4, separators=(',', ': '))
-            return realdata
+            arr.append(realdata)
+            x += 1
+        if x >= 20:
+            break
+    return arr
 
-json_obj = get_single_json()
+json_objs = get_single_json()
+# json_obj = get_single_json()
 
 filler = Filler()
-filler.add_match(json_obj)
+start = time.time()
+for x in json_objs:
+    filler.add_match(x)
+    print(time.time() - start)
