@@ -30,14 +30,11 @@ class Filler:
         match.teams = tmp_arr
 
         # Fill timeline
-        # tmp_arr = []
-        # for x in json_obj['timeline']:
-        #     tmp_arr.append(Timeline(**x['flat']))
-        # match.timeline = tmp_arr
+        print(json_obj['timeline'].keys())
+        print(json_obj['timeline']['flat'])
+        match.timeline = [Timeline(**json_obj['timeline']['flat'])]
         # #####################################
         # Participant
-
-        # Fill masters
 
         # Fill runes
 
@@ -51,14 +48,41 @@ class Filler:
         tmp_arr = []
         for x in part_json:
             x['flat']['masteries'] = self.get_masteries_arr(x['masteries'])
+            x['flat']['runes'] = self.get_runes_arr(x['runes'])
+            x['flat']['stats'] = [ParticipantStats(**x['stats']['flat'])]
+            print(x['timeline'])
+            timeline_keys = list(x['timeline'])
+            print(timeline_keys)
+            timeline_keys.remove('flat')
+            print(timeline_keys)
+            # x['flat']['timeline'] = self.get_part_timeline(x['timeline'])
+
             tmp_arr.append(Participant(**x['flat']))
         match.participants = tmp_arr
+
+    def get_part_timeline(self, timeline_json):
+        pass
+        # Must return participantTimeline
 
     @staticmethod
     def get_masteries_arr(mast_json):
         tmp_arr = []
         for x in mast_json:
             tmp_arr.append(Mastery(**x['flat']))
+        return tmp_arr
+
+    @staticmethod
+    def get_runes_arr(runes_json):
+        tmp_arr = []
+        for x in runes_json:
+            tmp_arr.append(Rune(**x['flat']))
+        return tmp_arr
+
+    @staticmethod
+    def get_part_stats_arr(stats_json):
+        tmp_arr = []
+        for x in stats_json:
+            tmp_arr.append(ParticipantStats(**x['flat']))
         return tmp_arr
 
 # filler = Filler()
