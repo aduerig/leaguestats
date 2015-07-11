@@ -22,17 +22,13 @@ class Filler:
         match.participantIdentities = tmp_arr
 
         # Fills all participant data
-        self.fill_participants(json_obj['participants'], match)
+        match.participants = self.fill_participants(json_obj['participants'])
 
         # Fills match timeline data, has to be sent as array
         # match.timeline = [Timeline(**json_obj['timeline']['flat'])]
         match.timeline = self.fill_timeline(json_obj['timeline'])
 
         # Fill teams
-        # tmp_arr = []
-        # for x in json_obj['teams']:
-        #     tmp_arr.append(Team(**x['flat']))
-        # match.teams = tmp_arr
         match.teams = self.fill_teams(json_obj['teams'])
         # ##########
 
@@ -54,7 +50,7 @@ class Filler:
         return tmp_arr
 
     # Fill all participants
-    def fill_participants(self, part_json, match):
+    def fill_participants(self, part_json):
         tmp_arr = []
         for x in part_json:
             x['flat']['masteries'] = self.get_masteries_arr(x['masteries'])
@@ -63,7 +59,7 @@ class Filler:
             x['flat']['timeline'] = self.get_part_timeline(x['timeline'])
 
             tmp_arr.append(Participant(**x['flat']))
-        match.participants = tmp_arr
+        return tmp_arr
 
     def fill_timeline(self, timeline_json):
         timeline_json['flat']['frames'] = self.get_frames(timeline_json['frames'])
