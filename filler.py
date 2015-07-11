@@ -21,18 +21,23 @@ class Filler:
             tmp_arr.append(ParticipantIdentity(**x['flat']))
         match.participantIdentities = tmp_arr
 
+        # Fills all participant data
         self.fill_participants(json_obj['participants'], match)
+
+        # Fills match timeline data, has to be sent as array
         match.timeline = [Timeline(**json_obj['timeline']['flat'])]
+
         # Fill teams
         tmp_arr = []
         for x in json_obj['teams']:
             tmp_arr.append(Team(**x['flat']))
         match.teams = tmp_arr
 
+        # Commit changes
         self.session.commit()
 
+    # Fill all participants
     def fill_participants(self, part_json, match):
-        # Fill participants
         tmp_arr = []
         for x in part_json:
             x['flat']['masteries'] = self.get_masteries_arr(x['masteries'])
