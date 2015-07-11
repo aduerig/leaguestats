@@ -168,14 +168,12 @@ class GetStats:
     def returnTimeline(self, jsonobj):
         newdict = {}
         newdict['flat'] = self.returnTimelineFlat(jsonobj['timeline'])
-        nestdict = {}
         nestarrp = []
         for key in jsonobj['timeline']:
             if key == 'frames':
                 for p in jsonobj['timeline'][key]:
-                    nestdict[key] = self.returnFrame(p)
-                    nestarrp.append(nestdict)
-        newdict['timeline'] = nestarrp
+                    nestarrp.append(self.returnFrame(p))
+        newdict['frames'] = nestarrp
         return newdict
 
     def returnFrameFlat(self, jsonobj):
@@ -192,9 +190,7 @@ class GetStats:
             if key == 'events':
                 nestarrp = []
                 for p in jsonobj['events']:
-                    nestdict = {}
-                    nestdict[key] = self.returnEvent(p)
-                    nestarrp.append(nestdict)
+                    nestarrp.append(self.returnEvent(p))
                 newdict['events'] = nestarrp
             if key == 'participantFrames':
                 nestarrp = []
