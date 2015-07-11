@@ -16,27 +16,21 @@ class Filler:
             filter(MatchDetail.matchId == json_obj['flat']['matchId']).first()
         if match is not None:
             return
+        
         self.session.add(MatchDetail(**json_obj['flat']))
         match = self.session.query(MatchDetail).filter(MatchDetail.matchId == json_obj['flat']['matchId']).first()
 
-        # ##########MatchDetail
         # Fill participantIdentities
-        # tmp_arr = []
-        # for x in json_obj['participantIdentities']:
-        #     tmp_arr.append(ParticipantIdentity(**x['flat']))
-        # match.participantIdentities = tmp_arr
         match.participantIdentities = self.fill_participant_identities(json_obj['participantIdentities'])
 
         # Fills all participant data
         match.participants = self.fill_participants(json_obj['participants'])
 
         # Fills match timeline data, has to be sent as array
-        # match.timeline = [Timeline(**json_obj['timeline']['flat'])]
         match.timeline = self.fill_timeline(json_obj['timeline'])
 
         # Fill teams
         match.teams = self.fill_teams(json_obj['teams'])
-        # ##########
 
         # Commit changes
         self.session.commit()
