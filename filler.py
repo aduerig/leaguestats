@@ -25,13 +25,16 @@ class Filler:
         self.fill_participants(json_obj['participants'], match)
 
         # Fills match timeline data, has to be sent as array
-        match.timeline = [Timeline(**json_obj['timeline']['flat'])]
+        # match.timeline = [Timeline(**json_obj['timeline']['flat'])]
+        match.timeline = self.fill_timeline(json_obj['timeline'])
 
         # Fill teams
         tmp_arr = []
         for x in json_obj['teams']:
             tmp_arr.append(Team(**x['flat']))
         match.teams = tmp_arr
+
+        # ##########
 
         # Commit changes
         self.session.commit()
@@ -48,11 +51,48 @@ class Filler:
             tmp_arr.append(Participant(**x['flat']))
         match.participants = tmp_arr
 
+    def fill_timeline(self, timeline_json):
+        timeline_json['flat']['frames'] = self.get_frames(timeline_json['frames'])
+        return [Timeline(**timeline_json['flat'])]
+
+    def get_frames(self, frame_json):
+        tmp_arr = []
+        for x in frame_json:
+            x['flat']['participantFrames'] = self.get_part_frames(x['participantFrames'])
+            x['flat']['events'] = self.get_events(x['events'])
+            tmp_arr.append(Frame(**x['flat']))
+        return tmp_arr
+
     @staticmethod
-    def get_part_timeline(timeline_json):
-        t_json = timeline_json
+    def get_part_frames(part_frame_json):
+        tmp_arr = []
+        for x in part_frame_json:
+            x['flat']['position'] = [PositionParticipantFrame(**x['position']['flat'])]
+
+            tmp_arr.append(ParticipantFrame(**x['flat']))
+        return tmp_arr
+
+    def get_events(self, events_json):
+        tmp_arr = []
+        for x in events_json:
+            x['flat']['position'] = [PositionEvent(**x['position']['flat'])]
+            x['flat']['assistingParticipantIds'] = self.get_assisting_participant_ids(x['assistingParticipantIds'])
+
+            tmp_arr.append(Event(**x['flat']))
+        return tmp_arr
+
+    @staticmethod
+    def get_assisting_participant_ids(part_arr):
+        tmp_arr = []
+        for x in part_arr:
+            tmp_arr.append(AssistingParticipantIds(participantId=x))
+        return tmp_arr
+
+    @staticmethod
+    def get_part_timeline(timeline_part_json):
+        t_json = timeline_part_json
         # Must return participantTimeline as an array [...]
-        t_keys = list(timeline_json)
+        t_keys = list(timeline_part_json)
         t_keys.remove('flat')
         for x in t_keys:
             t_class = eval(x)
