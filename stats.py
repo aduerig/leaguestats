@@ -130,7 +130,7 @@ class GetStats:
             newestdict = {}
             if((p != 'lane') & (p != 'role')):
                 newestdict['flat'] = jsonobj['timeline'][p]
-                newdict[p.capitalize()] = newestdict
+                newdict[(p[0].upper()) + (p[1:])] = newestdict
         return newdict
 
     def returnTeamFlat(self, jsonobj):
