@@ -199,8 +199,10 @@ class GetStats:
                 newdict['events'] = nestarrp
             if key == 'participantFrames':
                 nestarrp = []
+                x = 1
                 for p in jsonobj['participantFrames']:
-                    nestarrp.append(self.returnParticipantFrame(jsonobj['participantFrames']))
+                    nestarrp.append(self.returnParticipantFrame(jsonobj['participantFrames'], x))
+                    x += 1
                 newdict['participantFrames'] = nestarrp
         return newdict
 
@@ -245,19 +247,17 @@ class GetStats:
         # newdict['flat'] = self.returnAssistingParticipantIdFlat(jsonobj)
         return jsonobj
 
-    def returnParticipantFrameFlat(self, jsonobj):
+    def returnParticipantFrameFlat(self, jsonobj, num):
         newdict = {}
-        for j in jsonobj:
-            for key in jsonobj[j]:
-                if((key != 'position')):
-                    newdict[key] = jsonobj[j][key]
+        for key in jsonobj[str(num)]:
+            if((key != 'position')):
+                newdict[key] = jsonobj[str(num)][key]
         return newdict
 
-    def returnParticipantFrame(self, jsonobj): # there may be something wrong in this function
+    def returnParticipantFrame(self, jsonobj, num): # there may be something wrong in this function
         newdict = {}
-        newdict['flat'] = self.returnParticipantFrameFlat(jsonobj)
-        for j in jsonobj:
-            for key in jsonobj[j]:
-                if key == 'position':
-                    newdict['position'] = self.returnPosition(jsonobj[j]['position'])
+        newdict['flat'] = self.returnParticipantFrameFlat(jsonobj, num)
+        for key in jsonobj[str(num)]:
+            if key == 'position':
+                newdict['position'] = self.returnPosition(jsonobj[str(num)]['position'])
         return newdict

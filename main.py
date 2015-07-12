@@ -181,9 +181,9 @@ for g in dataC['entries']:
         dataM = api.getmatch(g['playerOrTeamName'], str(j['gameId']))
         statgetter = GetStats(dataM)
         realdata = statgetter.returnMatchDetail()
-        # with open('/Challenger Stats/test.txt', 'w') as outfile:
-        #     json.dump(realdata,  outfile, indent=4, separators=(',', ': '))
-        # print(realdata)
+        with open('/Challenger Stats/test.txt', 'w') as outfile:
+             json.dump(realdata,  outfile, indent=4, separators=(',', ': '))
+        print(realdata)
         if x == 0:
             break
         x += 1
