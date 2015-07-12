@@ -84,7 +84,7 @@ class Filler:
     def get_frames(self, frame_json):
         tmp_arr = []
         for x in frame_json:
-            # x['flat']['participantFrames'] = self.get_part_frames(x['participantFrames'])
+            x['flat']['participantFrames'] = self.get_part_frames(x['participantFrames'])
             if 'events' in x:
                 x['flat']['events'] = self.get_events(x['events'])
             tmp_arr.append(Frame(**x['flat']))
