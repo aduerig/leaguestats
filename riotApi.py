@@ -40,16 +40,16 @@ class RiotApi:
                 teamname = str(x['playerOrTeamName']).replace('\ufb01', '')
                 urlteam = 'https://na.api.pvp.net/api/lol/na/v2.4/team/' + teamid \
                                 + '?api_key='
-                self.dataT[teamname] = self.getlink(urlteam, teamname
+                self.dataT = self.getlink(urlteam, teamname
                                      + ' Match History', '/Challenger Stats/'
                                      + teamname + '/')  # Match history of team
                 break
-        return self.dataT[teamname][teamid]
+        return self.dataT[teamid]
 
     def getmatch(self, name, match):
         teamname = name.replace('\ufb01', '')
-        for y in self.dataT[teamname]:
-            for x in self.dataT[teamname][y]['matchHistory']:
+        for y in self.dataT:
+            for x in self.dataT[y]['matchHistory']:
                 if match == str(x['gameId']):
                     gameid = str(x['gameId'])
                     gamename = str('Match ' + gameid).replace('\ufb01', '')
