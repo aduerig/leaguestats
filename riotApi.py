@@ -22,15 +22,9 @@ class RiotApi:
         return
 
     def getlink(self, url, name, path):
-        if path != '':
-            if not os.path.exists(path):
-                os.makedirs(path)
-        if not os.path.isfile(path + name + '.json'):
-            self.stopwatch(10)
-            print('Getting ' + name + '.json ' + 'from riot')
-            data = json.loads(requests.get(url + self.myKey).text)
-        else:
-            data = None
+        self.stopwatch(10)
+        print('Getting ' + name + '.json ' + 'from riot')
+        data = json.loads(requests.get(url + self.myKey).text)
         return data
 
     def getchallenger(self):

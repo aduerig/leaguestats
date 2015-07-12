@@ -234,14 +234,6 @@ class GetStats:
         newdict['flat'] = self.returnFrameFlat(jsonobj)
         return newdict
 
-    def returnAssistingParticipantIdFlat(self, jsonobj):
-        pass
-        # newdict = {}
-        # print(jsonobj)
-        # for key in jsonobj:
-        #     newdict[key] = jsonobj[key]
-        # return newdict
-
     def returnAssistingParticipantId(self, jsonobj):  # has no nests
         # newdict = {}
         # newdict['flat'] = self.returnAssistingParticipantIdFlat(jsonobj)
@@ -254,7 +246,7 @@ class GetStats:
                 newdict[key] = jsonobj[str(num)][key]
         return newdict
 
-    def returnParticipantFrame(self, jsonobj, num): # there may be something wrong in this function
+    def returnParticipantFrame(self, jsonobj, num):  # there may be something wrong in this function
         newdict = {}
         newdict['flat'] = self.returnParticipantFrameFlat(jsonobj, num)
         for key in jsonobj[str(num)]:
