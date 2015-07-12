@@ -11,14 +11,8 @@ class RiotApi:
         self.dataT = {}
 
     def stopwatch(self, seconds):
-        start = time.time()
-        time.clock()
-        elapsed = 0
         print('Waiting 10 seconds to prevent request overflow...')
-        while elapsed < seconds:
-            elapsed = time.time() - start
-            # print("loop cycle time: %f, seconds count: %02d" % (time.clock(), elapsed))
-            time.sleep(1)
+        time.sleep(seconds)
         return
 
     def getlink(self, url, name, path):
