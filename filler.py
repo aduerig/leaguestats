@@ -11,12 +11,15 @@ class Filler:
         Base.metadata.create_all(self.engine, checkfirst=True)
 
     def add_match(self, json_obj):
+        # In case a full match isn't sent, return
+        if 'matchId' not in json_obj['flat']:
+            return
         # Check if match is already in the database
         match = self.session.query(MatchDetail).\
             filter(MatchDetail.matchId == json_obj['flat']['matchId']).first()
         if match is not None:
             return
-        
+
         self.session.add(MatchDetail(**json_obj['flat']))
         match = self.session.query(MatchDetail).filter(MatchDetail.matchId == json_obj['flat']['matchId']).first()
 
