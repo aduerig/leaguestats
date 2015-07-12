@@ -247,15 +247,17 @@ class GetStats:
 
     def returnParticipantFrameFlat(self, jsonobj):
         newdict = {}
-        for key in jsonobj:
-            if((key != 'position')):
-                newdict[key] = jsonobj[key]
+        for j in jsonobj:
+            for key in jsonobj[j]:
+                if((key != 'position')):
+                    newdict[key] = jsonobj[j][key]
         return newdict
 
     def returnParticipantFrame(self, jsonobj): # there may be something wrong in this function
         newdict = {}
         newdict['flat'] = self.returnParticipantFrameFlat(jsonobj)
-        for key in jsonobj:
-            if key == 'position':
-                newdict['position'] = self.returnPosition(jsonobj['position'])
+        for j in jsonobj:
+            for key in jsonobj[j]:
+                if key == 'position':
+                    newdict['position'] = self.returnPosition(jsonobj[j]['position'])
         return newdict
