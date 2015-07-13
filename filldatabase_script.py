@@ -1,6 +1,7 @@
 from stats import *
 from riotApi import *
 from filler import Filler
+from database import *
 import time
 
 
@@ -19,6 +20,10 @@ def fill_it_up():
         dataT = api.getteam(g['playerOrTeamName'])
         # Grabs all games form a team (dataT)
         for j in dataT['matchHistory']:
+            match = filler.session.query(MatchDetail).\
+                filter(MatchDetail.matchId == j['gameId']).first()
+            if match is not None:
+                continue
             dataM = api.getmatch(g['playerOrTeamName'], str(j['gameId']))
             statgetter = GetStats(dataM)
             realdata = statgetter.returnMatchDetail()
