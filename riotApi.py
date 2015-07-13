@@ -19,7 +19,7 @@ class RiotApi:
     def getlink(self, url, name, path):
         self.stopwatch(1.3)
         name = name.encode('utf-8')
-        print('Getting ' + name + '.json ' + 'from riot')
+        print(b'Getting ' + name + b'.json ' + b'from riot')
         data = json.loads(requests.get(url + self.myKey).text)
         return data
 
