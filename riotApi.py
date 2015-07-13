@@ -1,6 +1,7 @@
 import json
 import requests
 import time
+import codecs
 import os.path
 
 
@@ -17,6 +18,7 @@ class RiotApi:
 
     def getlink(self, url, name, path):
         self.stopwatch(1.3)
+        name = name.encode('utf-8')
         print('Getting ' + name + '.json ' + 'from riot')
         data = json.loads(requests.get(url + self.myKey).text)
         return data
