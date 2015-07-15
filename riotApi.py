@@ -3,6 +3,10 @@ import requests
 import time
 import codecs
 import os.path
+import logging
+import sys
+
+logger = logging.getLogger('leaguestats.riotApi')
 
 
 class RiotApi:
@@ -26,6 +30,7 @@ class RiotApi:
         urlchallenger = 'https://na.api.pvp.net/api/lol/na/v2.5/league/challenger' \
                         '?type=RANKED_TEAM_5x5&api_key='
         self.dataC = self.getlink(urlchallenger, 'Challenger Teams', '/Challenger Stats/')
+        logger.info('Successfully received data for all challenger teams')
         return self.dataC
 
     def getteam(self, name):
