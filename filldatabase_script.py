@@ -10,7 +10,7 @@ import logging.handlers
 api = RiotApi('70f53e5d-eea1-46f0-9e8a-19889489902f')
 logger = logging.getLogger('leaguestats')
 logger.setLevel(logging.INFO)
-timed_log = logging.handlers.TimedRotatingFileHandler('fill.log', when='D')
+timed_log = logging.handlers.TimedRotatingFileHandler('fill.log', when='W0', interval=4)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 timed_log.setFormatter(formatter)
 logger.addHandler(timed_log)
