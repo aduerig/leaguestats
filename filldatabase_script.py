@@ -14,7 +14,7 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 timed_log.setFormatter(formatter)
 logger.addHandler(timed_log)
 
-regions = ['kr', 'br', 'eune', 'euw', 'na', 'lan', 'oce', 'ru', 'tr']
+regions = ['na', 'kr', 'br', 'eune', 'euw', 'lan', 'oce', 'ru', 'tr']
 # Grabs challenger 5v5 teams
 
 # Outer loop running through all challenger teams (dataM)
