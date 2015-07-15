@@ -34,15 +34,16 @@ def fill_it_up():
             try:
                 dataM = api.getmatch(g['playerOrTeamName'], str(j['gameId']))
             except:
-                logger.exception('Exception while calling getmatch')
+                logger.exception('Exception while calling getmatch on team \"%s\" match %s',
+                                 g['playerOrTeamName'], str(j['gameId']))
                 continue
             statgetter = GetStats(dataM)
             realdata = statgetter.returnMatchDetail()
             filler.add_match(realdata)
             print(time.time() - start)
-            logger.info('Successfully added team \"%s\"s match %s', g['playerOrTeamName'], str(j['gameId']))
+            logger.info('Successfully added team \"%s\" match %s', g['playerOrTeamName'], str(j['gameId']))
             x += 1
-        logger.info('Finished adding all matches for team %s', g['playerOrTeamName'])
+        logger.info('Finished adding all matches for team \"%s\"', g['playerOrTeamName'])
 
 fill_it_up()
 # json_obj = get_single_json()
