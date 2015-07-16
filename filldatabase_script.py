@@ -14,7 +14,7 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 timed_log.setFormatter(formatter)
 logger.addHandler(timed_log)
 
-regions = ['na', 'kr', 'br', 'eune', 'euw', 'lan', 'oce', 'ru', 'tr']
+regions = ['lan', 'kr', 'br', 'eune', 'euw', 'na', 'oce', 'ru', 'tr']
 # Grabs challenger 5v5 teams
 
 # Outer loop running through all challenger teams (dataM)
@@ -40,8 +40,13 @@ def fill_it_up():
                     logger.exception('Exception while calling getmatch on team \"%s\" match %s',
                                      g['playerOrTeamName'].encode('utf-8'), str(j['gameId']).encode('utf-8'))
                     continue
-                statgetter = GetStats(dataM)
-                realdata = statgetter.returnMatchDetail()
+                try:
+                    statgetter = GetStats(dataM)
+                    realdata = statgetter.returnMatchDetail()
+                except:
+                    logger.exception('Exception while creating statgetter on team \"%s\" match %s',
+                                     g['playerOrTeamName'].encode('utf-8'), str(j['gameId']).encode('utf-8'))
+                    continue
                 filler.add_match(realdata)
                 print(time.time() - start)
                 logger.info('Successfully added team \"%s\" match %s', g['playerOrTeamName'].encode('utf-8'),
