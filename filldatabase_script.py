@@ -15,7 +15,6 @@ timed_log.setFormatter(formatter)
 logger.addHandler(timed_log)
 
 regions = ['lan', 'kr', 'br', 'eune', 'euw', 'na', 'oce', 'ru', 'tr']
-# Grabs challenger 5v5 teams
 
 # Outer loop running through all challenger teams (dataM)
 def fill_it_up():
@@ -56,8 +55,3 @@ def fill_it_up():
         logger.info('Finished adding all matches for region %s', region)
 
 fill_it_up()
-# json_obj = get_single_json()
-
-# for x in json_objs:
-#     filler.add_match(x)
-#     print(time.time() - start)
