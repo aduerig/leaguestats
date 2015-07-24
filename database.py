@@ -194,6 +194,7 @@ class ParticipantStats(Base):
     wardsPlaced = Column(BigInteger)
     winner = Column(Boolean)
 
+# Index('idx_participant_id', ParticipantStats.participant_id)
 
 class ParticipantTimeline(Base):
     __tablename__ = 'participant_timeline'
